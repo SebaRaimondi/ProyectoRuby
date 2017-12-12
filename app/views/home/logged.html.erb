@@ -1,0 +1,10 @@
+<h1>Home#logged</h1>
+<%= Time.now %>
+<li><%= link_to "Sign Up", new_user_registration_path %></li>
+<li><%= link_to "Sign In", new_user_session_path %></li>
+<li><%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %></li>
+
+<% if user_signed_in? %>
+You are signed in, current_user.id = <%= current_user.id %><br />
+user_session.keys => <%= user_session.keys %>
+<% end %>
