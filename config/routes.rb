@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :results
+  resources :evaluations
+  resources :courses
+  resources :students
+  resources :courses do
+      end
+
   devise_for :users
   get 'home/index'
   get 'home/logged'
