@@ -2220,23 +2220,3 @@ Processing by HomeController#logged as HTML
 Completed 200 OK in 80ms (Views: 78.4ms | ActiveRecord: 0.0ms)
 
 
-Started GET "/users/sign_in" for 127.0.0.1 at 2017-12-12 19:53:53 -0300
-  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-
-ActiveRecord::PendingMigrationError - Migrations are pending. To resolve this issue, run:
-
-        bin/rails db:migrate RAILS_ENV=development
-
-:
-
-Started POST "/__better_errors/0081526c7bf9f4f4/variables" for 127.0.0.1 at 2017-12-12 19:53:53 -0300
-Started GET "/" for 127.0.0.1 at 2017-12-12 19:53:58 -0300
-  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-
-ActiveRecord::PendingMigrationError - Migrations are pending. To resolve this issue, run:
-
-        bin/rails db:migrate RAILS_ENV=development
-
-:
-
-Started POST "/__better_errors/6158e657582ad094/variables" for 127.0.0.1 at 2017-12-12 19:53:58 -0300
