@@ -1,31 +1,32 @@
 <h1>Listing students</h1>
 
 <table>
-  <tr>
-    <th>Surname</th>
-    <th>Name</th>
-    <th>Dni</th>
-    <th>Number</th>
-    <th>Email</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <tr>
+        <th>Surname</th>
+        <th>Name</th>
+        <th>Dni</th>
+        <th>Number</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
 
-<% @students.each do |student| %>
-  <tr>
-    <td><%= student.surname %></td>
-    <td><%= student.name %></td>
-    <td><%= student.dni %></td>
-    <td><%= student.number %></td>
-    <td><%= student.email %></td>
-    <td><%= link_to 'Show', [student.course, student] %></td>
-    <td><%= link_to 'Edit', edit_course_student_path(student.course, student) %></td>
-    <td><%= link_to 'Destroy', [student.course, student], :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+    <% @students.each do |student| %>
+        <tr>
+            <td><%= student.surname %></td>
+            <td><%= student.name %></td>
+            <td><%= student.dni %></td>
+            <td><%= student.number %></td>
+            <td><%= student.email %></td>
+            <td><%= link_to 'Show', [student.course, student] %></td>
+            <td><%= link_to 'Edit', edit_course_student_path(student.course, student) %></td>
+            <td><%= link_to 'Destroy', [student.course, student], :confirm => 'Are you sure?', :method => :delete %></td>
+        </tr>
+    <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Student', new_course_student_path(params[:course_id]) %>
+<%= link_to 'Volver a Cursadas', courses_path(params[:course_id]) %>

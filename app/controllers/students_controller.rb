@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_students
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_student, only: %i[show edit update destroy]
 
   # GET courses/1/students
   def index
@@ -8,8 +8,7 @@ class StudentsController < ApplicationController
   end
 
   # GET courses/1/students/1
-  def show
-  end
+  def show; end
 
   # GET courses/1/students/new
   def new
@@ -17,8 +16,7 @@ class StudentsController < ApplicationController
   end
 
   # GET courses/1/students/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST courses/1/students
   def create
@@ -48,17 +46,18 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_students
-      @course = Course.find(params[:course_id])
-    end
 
-    def set_student
-      @student = @course.students.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_students
+    @course = Course.find(params[:course_id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def student_params
-      params.require(:student).permit(:surname, :name, :dni, :number, :email)
-    end
+  def set_student
+    @student = @course.students.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def student_params
+    params.require(:student).permit(:surname, :name, :dni, :number, :email)
+  end
 end

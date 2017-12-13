@@ -1,6 +1,6 @@
 class ExamsController < ApplicationController
   before_action :set_exams
-  before_action :set_exam, only: [:show, :edit, :update, :destroy]
+  before_action :set_exam, only: %i[show edit update destroy]
 
   # GET courses/1/exams
   def index
@@ -8,8 +8,7 @@ class ExamsController < ApplicationController
   end
 
   # GET courses/1/exams/1
-  def show
-  end
+  def show; end
 
   # GET courses/1/exams/new
   def new
@@ -17,8 +16,7 @@ class ExamsController < ApplicationController
   end
 
   # GET courses/1/exams/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST courses/1/exams
   def create
@@ -48,17 +46,18 @@ class ExamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exams
-      @course = Course.find(params[:course_id])
-    end
 
-    def set_exam
-      @exam = @course.exams.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_exams
+    @course = Course.find(params[:course_id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def exam_params
-      params.require(:exam).permit(:title, :date, :min)
-    end
+  def set_exam
+    @exam = @course.exams.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def exam_params
+    params.require(:exam).permit(:title, :date, :min)
+  end
 end
