@@ -18,7 +18,7 @@
                             <h3 class="panel-title">Examenes</h3>
                         </div>
                         <div class="col col-xs-6 text-right">
-                            <%= link_to '<button type="button" class="btn btn-sm btn-primary btn-create">Nuevo Examen</button>'.html_safe, new_course_exam_path %>
+                            <%= link_to '<button type="button" class="button">Nuevo Examen</button>'.html_safe, new_course_exam_path %>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,6 @@
                                 <th>
                                     <em class="fa fa-cog"></em>
                                 </th>
-                                <th class="hidden-xs">ID</th>
                                 <th>Titulo</th>
                                 <th>Fecha</th>
                                 <th>Minimo</th>
@@ -43,7 +42,6 @@
                                         <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_exam_path(exam.course, exam), class: "btn btn-default" %>
                                         <%= link_to '<em class="fa fa-trash"></em>'.html_safe, [exam.course, exam], :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %>
                                     </td>
-                                    <td class="hidden-xs"><%= exam.id %></td>
                                     <td><%= exam.title %></td>
                                     <td><%= exam.date %></td>
                                     <td><%= exam.min %></td>
@@ -54,7 +52,7 @@
 
                 </div>
             </div>
-            <%= link_to '<button type="button" class="btn btn-sm btn-primary btn-create btn-red">Volver a Cursadas</button>'.html_safe, courses_path(params[:course_id]) %>
+            <%= link_to '<button type="button" class="button btn-red">Volver a Cursadas</button>'.html_safe, courses_path(params[:course_id]) %>
         </div>
     </div>
 </div>

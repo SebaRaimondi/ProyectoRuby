@@ -13,7 +13,7 @@
 
 .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
     text-align:center;
-    width: 100px;
+    width: 150px;
 }
 
 .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
@@ -56,9 +56,40 @@ used to vertically center elements, may need modification if you're not using de
 }
 
 .btn-red {
-    background-color: #b73232;
-    border-color: #a42e2e;
+    background-color: #b73232!important;
+    border-color: #a42e2e!important;
 }
 .btn-danger {
+    color: #fff!important;
+}
+
+hr {
+    border-width: 1.3px;
+    border-color: #ddd;
+}
+
+.button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 4px;
+    user-select: none;
     color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.panel-title {
+    font-size: 23px;
+    line-height: 35px!important;
+    padding-left: 10px;
 }

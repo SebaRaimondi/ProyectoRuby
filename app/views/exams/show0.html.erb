@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @exam.title %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @exam.date %>
+</p>
+
+<p>
+  <b>Min:</b>
+  <%= @exam.min %>
+</p>
+
+
+<%= link_to 'Edit', edit_course_exam_path(@exam.course, @exam) %> |
+<%= link_to 'Back', course_exams_path(@exam.course) %>
