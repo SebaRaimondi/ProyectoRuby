@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  resources :courses do
+    resources :exams
+  end
+  resources :courses do
+    resources :students
+  end
   devise_for :users
-  get 'home/index'
-  get 'home/logged'
 
   authenticated :user do
     root 'home#logged', as: :authenticated_root
