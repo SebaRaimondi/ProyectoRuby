@@ -14,8 +14,8 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'rails_layout'
 gem 'jquery-rails'
-
 gem 'nested_scaffold'
+gem 'validates_email_format_of'
 # /Non-Default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
