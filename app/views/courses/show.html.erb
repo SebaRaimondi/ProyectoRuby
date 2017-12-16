@@ -23,17 +23,15 @@
                 <% @course.students.each do |s| %>
                     <tr>
                         <td><%= s.name %></td>
-                        <% @course.exams.each_with_index do |e, i| %>
-                            <%
-                            @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
+                        <% @course.exams.each do |e| %>
+                            <% @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
                             @class = if @mark == 'Ausente'
                                'warning'
                              elsif @mark < e.min
                                'danger'
                              else
                                'success'
-                             end
-                            %>
+                             end %>
                                 <td class="<%= @class %>"><%= @mark %></td>
                             <% end %>
                         </tr>
@@ -44,9 +42,57 @@
         <div class="row" style="text-align: center">
             <div class="center-helper container">
                 <%= link_to '<button type="button" class="button btn-red" style="font-size: 11px">Volver a Cursadas</button>'.html_safe, courses_path %>
-                <button type="button" class="button" style="font-size: 11px">Modificar Notas</button>
+                <button type="button" class="button" data-toggle="modal" data-target="#resultsModal" style="font-size: 11px">Modificar Notas</button>
                 <%= link_to '<button type="button" class="button" style="font-size: 11px">Administrar Examenes</button>'.html_safe, course_exams_path(@course) %>
                 <%= link_to '<button type="button" class="button" style="font-size: 11px">Administrar Alumnos</button>'.html_safe, course_students_path(@course) %>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title">Modificar Notas</h4>
+                </div>
+                <div class="modal-body">
+                    <%= form_tag do %>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" style="vertical-align: middle;">Alumnos</th>
+                                <th colspan="<%= @course.exams.size %>">Examenes</th>
+                            </tr>
+                            <tr>
+                                <% @course.exams.each do |e| %>
+                                    <th><%= e.title %></td>
+                                <% end %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @course.students.each do |s| %>
+                                <tr>
+                                    <td><%= s.name %></td>
+                                    <% @course.exams.each do |e| %>
+                                        <% @mark = e.students.include?(s) ? s.mark_for(e) : "" %>
+                                            <td>
+                                                <input class="input-nota" type="number" name="?" value="<%= @mark %>">
+                                            </td>
+                                        <% end %>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    <% end %>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
