@@ -16,6 +16,7 @@
                 <td><%= course.year %></td>
                 <td><%= link_to 'Alumnos', course_students_path(course) %></td>
                 <td><%= link_to 'Examenes', course_exams_path(course) %></td>
+                <td><%= link_to 'Ver', course_path(course) %></td>
                 <td><%= link_to 'Edit', edit_course_path(course) %></td>
                 <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>

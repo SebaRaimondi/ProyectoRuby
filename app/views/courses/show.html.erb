@@ -1,9 +1,42 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Year:</strong>
-  <%= @course.year %>
-</p>
+    <%= link_to 'Edit', edit_course_path(@course) %>
+    |
+    <%= link_to 'Back', courses_path %>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;"><%= ("Cursada " + @course.year.to_s).html_safe %></h1>
+    </div>
+    <div class="row">
+        <table class="table table-responsive table-sm table-hover">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="vertical-align: middle;">Alumnos</th>
+                    <th colspan="<%= @course.exams.size %>">Examenes</th>
+                </tr>
+                <tr>
+                    <% @course.exams.each do |e| %>
+                        <th><%= e.title %></td>
+                    <% end %>
+                </tr>
+            </thead>
+            <tbody>
+                <% @course.students.each do |s| %>
+                    <tr>
+                        <td><%= s.name %></td>
+                        <td>Ausente</td>
+                        <td>Ausente</td>
+                        <td>Ausente</td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= link_to '<button type="button" class="button btn-red" style="font-size: 11px">Volver a Cursadas</button>'.html_safe, courses_path %>
+    </div>
+</div>
