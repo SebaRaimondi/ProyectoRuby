@@ -59,6 +59,14 @@ class CoursesController < ApplicationController
     end
   end
 
+  def results
+    if @course.update(results_params)
+      redirect_to @course, notice: 'Course was successfully updated.'
+    else
+      render @course, notice: 'Ocurrio un error al intentar actualizar las notas'
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -68,6 +76,10 @@ class CoursesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def course_params
+    params.require(:course).permit(:year)
+  end
+
+  def results_params
     params.require(:course).permit(:year)
   end
 end

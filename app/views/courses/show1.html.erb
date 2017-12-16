@@ -57,7 +57,7 @@
                     <h3 class="modal-title">Modificar Notas</h4>
                 </div>
                 <div class="modal-body">
-                    <%= form_tag("/courses/#{@course.id}/results", method: "post") do %>
+                    <%= form_tag do %>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
@@ -75,19 +75,9 @@
                                 <tr>
                                     <td><%= s.name %></td>
                                     <% @course.exams.each do |e| %>
-                                        <%
-                                            @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
-                                            @class = if @mark == 'Ausente'
-                                                'warning'
-                                            elsif @mark < e.min
-                                                'danger'
-                                            else
-                                                'success'
-                                            end
-                                            @name = "#{e.id},#{s.id}"
-                                        %>
-                                            <td class="<%= @class %>">
-                                                <input class="input-nota" type="number" min="0" name="<%= @name %>" value="<%= @mark %>">
+                                        <% @mark = e.students.include?(s) ? s.mark_for(e) : "" %>
+                                            <td>
+                                                <input class="input-nota" type="number" name="?" value="<%= @mark %>">
                                             </td>
                                         <% end %>
                                     </tr>

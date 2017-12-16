@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   resources :courses do
     resources :exams
   end
+
   resources :courses do
     resources :students
+    post 'results'
   end
+
   devise_for :users
 
   authenticated :user do
