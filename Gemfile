@@ -16,6 +16,7 @@ gem 'rails_layout'
 gem 'jquery-rails'
 gem 'nested_scaffold'
 gem 'validates_email_format_of'
+gem 'json'
 # /Non-Default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

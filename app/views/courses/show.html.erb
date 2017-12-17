@@ -25,7 +25,8 @@
                         <td><%= s.name %></td>
                         <% @course.exams.each do |e| %>
                             <% @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
-                            @class = if @mark == 'Ausente'
+                            @class = if (@mark == 'Ausente' || @mark == nil)
+                                @mark = 'Ausente'
                                'warning'
                              elsif @mark < e.min
                                'danger'
@@ -76,15 +77,16 @@
                                     <td><%= s.name %></td>
                                     <% @course.exams.each do |e| %>
                                         <%
-                                            @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
-                                            @class = if @mark == 'Ausente'
+                                            @mark = e.students.include?(s) ? s.mark_for(e) : ''
+                                            @class = if (@mark == '' || @mark == nil)
+                                                @mark = ''
                                                 'warning'
                                             elsif @mark < e.min
                                                 'danger'
                                             else
                                                 'success'
                                             end
-                                            @name = "#{e.id},#{s.id}"
+                                            @name = "results[#{e.id}[#{s.id}]]"
                                         %>
                                             <td class="<%= @class %>">
                                                 <input class="input-nota" type="number" min="0" name="<%= @name %>" value="<%= @mark %>">
@@ -94,15 +96,15 @@
                                 <% end %>
                             </tbody>
                         </table>
-                    <% end %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <input type="submit" class="btn btn-primary" value="Guardar Cambios"></button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
+            <% end %>
         </div>
-        <!-- /.modal-dialog -->
+        <!-- /.modal-content -->
     </div>
-    <!-- /.modal -->
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

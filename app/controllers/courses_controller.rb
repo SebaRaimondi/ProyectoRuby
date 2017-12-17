@@ -60,7 +60,8 @@ class CoursesController < ApplicationController
   end
 
   def results
-    if @course.update(results_params)
+    @course = set_course
+    if @course.update_results(result_params)
       redirect_to @course, notice: 'Course was successfully updated.'
     else
       render @course, notice: 'Ocurrio un error al intentar actualizar las notas'
@@ -79,7 +80,7 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:year)
   end
 
-  def results_params
-    params.require(:course).permit(:year)
+  def result_params
+    params.require(:results)
   end
 end
