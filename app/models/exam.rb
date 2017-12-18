@@ -3,6 +3,8 @@ class Exam < ApplicationRecord
   has_many :results
   has_many :students, through: :results
 
+  default_scope { order(date: :asc, title: :asc) }
+
   def results(params)
     params.each_pair do |key, val|
       s = Student.find(key)

@@ -25281,3 +25281,525 @@ Processing by CoursesController#show as HTML
 Completed 200 OK in 139ms (Views: 129.8ms | ActiveRecord: 7.5ms)
 
 
+  [1m[36mExam Load (1.3ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/courses/1" for 127.0.0.1 at 2017-12-18 20:13:35 -0300
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "exams" WHERE "exams"."course_id" = ?[0m  [["course_id", 1]]
+  [1m[36mExam Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = ? LIMIT ?[0m  [["course_id", 1], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT "exams".* FROM "exams" WHERE "exams"."course_id" = ? ORDER BY "exams"."date" ASC, "exams"."title" ASC[0m  [["course_id", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" ASC, "students"."name" ASC[0m  [["course_id", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.7ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered courses/show.html.erb within layouts/application (147.1ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (13.3ms)
+  Rendered layouts/_navigation.html.erb (15.0ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 245ms (Views: 215.8ms | ActiveRecord: 11.1ms)
+
+
+Started GET "/courses" for 127.0.0.1 at 2017-12-18 20:13:44 -0300
+Processing by CoursesController#index as HTML
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" ORDER BY "courses"."year" ASC, "courses"."title" ASC[0m
+  Rendered courses/index.html.erb within layouts/application (3.1ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (1.6ms)
+  Rendered layouts/_navigation.html.erb (3.4ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 71ms (Views: 68.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/courses/new" for 127.0.0.1 at 2017-12-18 20:13:46 -0300
+Processing by CoursesController#new as HTML
+  Rendering courses/new.html.erb within layouts/application
+  Rendered courses/_form.html.erb (3.4ms)
+  Rendered courses/new.html.erb within layouts/application (4.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (1.5ms)
+  Rendered layouts/_navigation.html.erb (3.5ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 78ms (Views: 62.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/courses" for 127.0.0.1 at 2017-12-18 20:13:55 -0300
+Processing by CoursesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"psNmRCYhZG6s9YyAbK74FRxv6cibfS8T91wsayk5JBMIleujJNp9OsTcgo4ec2qabfDVC74CSbovlAbS7ukeaQ==", "course"=>{"year"=>"2015", "title"=>"asdasd"}, "commit"=>"Submit"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (8.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "created_at", "updated_at", "title") VALUES (?, ?, ?, ?)[0m  [["year", 2015], ["created_at", "2017-12-18 23:13:55.682474"], ["updated_at", "2017-12-18 23:13:55.682474"], ["title", "asdasd"]]
+  [1m[35m (11.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/courses/7
+Completed 302 Found in 27ms (ActiveRecord: 19.7ms)
+
+
+Started GET "/courses/7" for 127.0.0.1 at 2017-12-18 20:13:55 -0300
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "exams" WHERE "exams"."course_id" = ?[0m  [["course_id", 7]]
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" ASC, "students"."name" ASC[0m  [["course_id", 7]]
+  Rendered courses/show.html.erb within layouts/application (9.4ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (1.6ms)
+  Rendered layouts/_navigation.html.erb (3.4ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 90ms (Views: 83.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/courses" for 127.0.0.1 at 2017-12-18 20:13:57 -0300
+Processing by CoursesController#index as HTML
+  Rendering courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT "courses".* FROM "courses" ORDER BY "courses"."year" ASC, "courses"."title" ASC[0m
+  Rendered courses/index.html.erb within layouts/application (4.7ms)
+  Rendered layouts/_navigation_links.html.erb (0.5ms)
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (5.5ms)
+  Rendered layouts/_navigation.html.erb (8.9ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 118ms (Views: 114.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/courses/1" for 127.0.0.1 at 2017-12-18 20:14:00 -0300
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "exams" WHERE "exams"."course_id" = ?[0m  [["course_id", 1]]
+  [1m[36mExam Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = ? LIMIT ?[0m  [["course_id", 1], ["LIMIT", 1]]
+  [1m[36mExam Load (0.3ms)[0m  [1m[34mSELECT "exams".* FROM "exams" WHERE "exams"."course_id" = ? ORDER BY "exams"."date" ASC, "exams"."title" ASC[0m  [["course_id", 1]]
+  [1m[36mStudent Load (1.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" ASC, "students"."name" ASC[0m  [["course_id", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.4ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.4ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered courses/show.html.erb within layouts/application (84.7ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (1.5ms)
+  Rendered layouts/_navigation.html.erb (3.5ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 146ms (Views: 134.0ms | ActiveRecord: 9.2ms)
+
+
+Started GET "/courses/1" for 127.0.0.1 at 2017-12-18 20:14:15 -0300
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "exams" WHERE "exams"."course_id" = ?[0m  [["course_id", 1]]
+  [1m[36mExam Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = ? LIMIT ?[0m  [["course_id", 1], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT "exams".* FROM "exams" WHERE "exams"."course_id" = ? ORDER BY "exams"."date" ASC, "exams"."title" ASC[0m  [["course_id", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" DESC[0m  [["course_id", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.9ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (1.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.6ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered courses/show.html.erb within layouts/application (139.8ms)
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (17.0ms)
+  Rendered layouts/_navigation.html.erb (18.8ms)
+  Rendered layouts/_messages.html.erb (0.9ms)
+Completed 200 OK in 241ms (Views: 213.8ms | ActiveRecord: 12.4ms)
+
+
+Started GET "/courses/1" for 127.0.0.1 at 2017-12-18 20:14:24 -0300
+Processing by CoursesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering courses/show.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "exams" WHERE "exams"."course_id" = ?[0m  [["course_id", 1]]
+  [1m[36mExam Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = ? LIMIT ?[0m  [["course_id", 1], ["LIMIT", 1]]
+  [1m[36mExam Load (0.7ms)[0m  [1m[34mSELECT "exams".* FROM "exams" WHERE "exams"."course_id" = ? ORDER BY "exams"."date" ASC, "exams"."title" DESC[0m  [["course_id", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" DESC[0m  [["course_id", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (1.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 2 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 3 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 5], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 5 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 6], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 6 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 7], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 7 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE Student Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = ? AND "students"."id" = ? LIMIT ?[0m  [["exam_id", 8], ["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Result Load (0.0ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."student_id" = 1 AND "results"."exam_id" = 8 ORDER BY "results"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered courses/show.html.erb within layouts/application (165.8ms)
+  Rendered layouts/_navigation_links.html.erb (0.4ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (17.9ms)
+  Rendered layouts/_navigation.html.erb (21.4ms)
+  Rendered layouts/_messages.html.erb (3.1ms)
+Completed 200 OK in 282ms (Views: 254.7ms | ActiveRecord: 14.0ms)
+
+
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:14:51 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" ASC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (13.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (11.9ms)
+  Rendered layouts/_navigation.html.erb (13.6ms)
+  Rendered layouts/_messages.html.erb (1.8ms)
+Completed 200 OK in 101ms (Views: 79.7ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/courses/1/students/new" for 127.0.0.1 at 2017-12-18 20:14:53 -0300
+Processing by StudentsController#new as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (5.3ms)
+  Rendered students/new.html.erb within layouts/application (7.3ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (1.5ms)
+  Rendered layouts/_navigation.html.erb (3.2ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 70ms (Views: 65.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:15:04 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" ASC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (4.1ms)
+  Rendered layouts/_navigation_links.html.erb (0.3ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (1.7ms)
+  Rendered layouts/_navigation.html.erb (3.7ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 99ms (Views: 94.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/courses/1/students/new" for 127.0.0.1 at 2017-12-18 20:15:05 -0300
+Processing by StudentsController#new as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (4.8ms)
+  Rendered students/new.html.erb within layouts/application (7.0ms)
+  Rendered layouts/_navigation_links.html.erb (0.6ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (3.0ms)
+  Rendered layouts/_navigation.html.erb (6.3ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 138ms (Views: 126.4ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:15:16 -0300
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AbDApkOTwjTpTJzI2yFFAEMrhsxXhKWHO+4luPCKUlVBhxtmhqyuIoC25UYe2fDDQiByeDbBlwMtz3tp0r+USw==", "student"=>{"surname"=>"Dasdasd", "name"=>"Dasdasd", "dni"=>"40345182", "number"=>"21755/8", "email"=>"sebastianraimondi@gmail.com"}, "commit"=>"Confirmar", "course_id"=>"1"}
+  [1m[36mCourse Load (0.9ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.9ms)[0m  [1m[32mINSERT INTO "students" ("course_id", "surname", "name", "dni", "number", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["surname", "Dasdasd"], ["name", "Dasdasd"], ["dni", "40345182"], ["number", "21755/8"], ["email", "sebastianraimondi@gmail.com"], ["created_at", "2017-12-18 23:15:16.043500"], ["updated_at", "2017-12-18 23:15:16.043500"]]
+  [1m[35m (9.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/courses/1/students/5
+Completed 302 Found in 23ms (ActiveRecord: 12.1ms)
+
+
+Started GET "/courses/1/students/5" for 127.0.0.1 at 2017-12-18 20:15:16 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/courses/1/students/5"):
+  
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.11.0) lib/puma/configuration.rb:225:in `call'
+puma (3.11.0) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.0) lib/puma/server.rb:438:in `process_client'
+puma (3.11.0) lib/puma/server.rb:302:in `block in run'
+puma (3.11.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:17:44 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" ASC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (14.6ms)
+  Rendered layouts/_navigation_links.html.erb (0.4ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (12.8ms)
+  Rendered layouts/_navigation.html.erb (14.9ms)
+  Rendered layouts/_messages.html.erb (0.9ms)
+Completed 200 OK in 100ms (Views: 79.1ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:18:05 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" DESC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" ASC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (15.9ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (13.8ms)
+  Rendered layouts/_navigation.html.erb (15.6ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 124ms (Views: 102.0ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:18:17 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" DESC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (18.1ms)
+  Rendered layouts/_navigation_links.html.erb (0.5ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (17.9ms)
+  Rendered layouts/_navigation.html.erb (22.1ms)
+  Rendered layouts/_messages.html.erb (1.5ms)
+Completed 200 OK in 141ms (Views: 105.0ms | ActiveRecord: 4.6ms)
+
+
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:18:18 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" DESC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (4.4ms)
+  Rendered layouts/_navigation_links.html.erb (2.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (2.9ms)
+  Rendered layouts/_navigation.html.erb (9.7ms)
+  Rendered layouts/_messages.html.erb (0.9ms)
+Completed 200 OK in 114ms (Views: 109.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:18:22 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.7ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" DESC, "students"."name" DESC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (13.1ms)
+  Rendered layouts/_navigation_links.html.erb (0.4ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (14.5ms)
+  Rendered layouts/_navigation.html.erb (18.6ms)
+  Rendered layouts/_messages.html.erb (1.3ms)
+Completed 200 OK in 125ms (Views: 101.6ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/courses/1/students" for 127.0.0.1 at 2017-12-18 20:18:32 -0300
+Processing by StudentsController#index as HTML
+  Parameters: {"course_id"=>"1"}
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."course_id" = ? ORDER BY "students"."surname" ASC, "students"."name" ASC[0m  [["course_id", 1]]
+  Rendered students/index.html.erb within layouts/application (23.0ms)
+  Rendered layouts/_navigation_links.html.erb (0.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layouts/_nav_links_for_auth.html.erb (15.0ms)
+  Rendered layouts/_navigation.html.erb (16.9ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 140ms (Views: 116.2ms | ActiveRecord: 2.7ms)
+
+

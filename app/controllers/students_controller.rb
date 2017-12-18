@@ -23,7 +23,7 @@ class StudentsController < ApplicationController
     @student = @course.students.build(student_params)
 
     if @student.save
-      redirect_to([@student.course, @student], notice: 'Student was successfully created.')
+      redirect_to(course_students_path, notice: 'El alumno se creo exitosamente.')
     else
       render action: 'new'
     end
@@ -32,7 +32,7 @@ class StudentsController < ApplicationController
   # PUT courses/1/students/1
   def update
     if @student.update_attributes(student_params)
-      redirect_to([@student.course, @student], notice: 'Student was successfully updated.')
+      redirect_to(course_students_path, notice: 'El alumno se modifico exitosamente.')
     else
       render action: 'edit'
     end

@@ -2,6 +2,8 @@ class Course < ApplicationRecord
   has_many :exams
   has_many :students
 
+  default_scope { order(year: :asc, title: :asc) }
+
   def update_results(params)
     h = params
     # h.each_pair do |_key, val|

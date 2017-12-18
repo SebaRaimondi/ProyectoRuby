@@ -7,6 +7,8 @@ class Student < ApplicationRecord
   validates :number, format: { with: /\A[1-9]\d{0,6}.[\/][1-9]\d{0,2}\z/,
                                message: 'El legajo ingresado no es valido.' }
 
+  default_scope { order(surname: :asc, name: :asc) }
+
   def mark_for(exam)
     (Result.for self, exam).first.mark
   end
