@@ -1,37 +1,33 @@
-<%= form_for([@student.course, @student]) do |f| %>
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+<div class="container">
+    <% if @student.id.blank? %>
+        <h1 style="text-align: center;">Nuevo Alumno</h1>
+    <% else %>
+        <h1 style="text-align: center;"><%= "Editando Alumno #{@student.surname}, #{@student.name}" %></h1>
+    <% end %>
+    <br>
+    <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+        <% if @student.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@student.errors.count, "error") %>
+                    prohibited this student from being saved:</h2>
 
-      <ul>
-      <% @student.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :surname %><br />
-    <%= f.text_field :surname %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :dni %><br />
-    <%= f.text_field :dni %>
-  </div>
-  <div class="field">
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                <ul>
+                    <% @student.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <%= bootstrap_form_for([@student.course, @student]) do |f| %>
+        <%= f.text_field :surname, required: true %>
+        <%= f.text_field :name, required: true %>
+        <%= f.number_field :dni, required: true %>
+        <%= f.text_field :number, required: true %>
+        <%= f.email_field :email, required: true %>
+        <div class="center-helper" style="width: 100%;">
+            <%= f.submit "Confirmar", class: "button" %>
+            <%= link_to '<button type="button" class="button btn-red">Volver a Alumnos</button>'.html_safe, course_students_path %>
+        </div>
+    <% end %>
+</div>
+</div>
