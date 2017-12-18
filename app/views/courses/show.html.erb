@@ -3,7 +3,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center;"><%= ("Cursada " + @course.year.to_s).html_safe %></h1>
+        <h1 style="text-align: center;"><%= (@course.title.to_s + " - " + @course.year.to_s).html_safe %></h1>
     </div>
     <br>
     <div class="row">
@@ -14,8 +14,12 @@
                     <th colspan="<%= @course.exams.size %>">Examenes</th>
                 </tr>
                 <tr>
-                    <% @course.exams.each do |e| %>
-                        <th><%= e.title %></td>
+                    <% if @course.exams.empty? %>
+                        <td>No se cargo ningnun examen todavia</td>
+                    <% else %>
+                        <% @course.exams.each do |e| %>
+                            <th><%= e.title %></th>
+                        <% end %>
                     <% end %>
                 </tr>
             </thead>
@@ -23,8 +27,11 @@
                 <% @course.students.each do |s| %>
                     <tr>
                         <td><%= s.name %></td>
-                        <% @course.exams.each do |e| %>
-                            <% @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
+                        <% if @course.exams.empty? %>
+                            <td></td>
+                        <% else %>
+                            <% @course.exams.each do |e| %>
+                                <% @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
                             @class = if (@mark == 'Ausente' || @mark == nil)
                                 @mark = 'Ausente'
                                'warning'
@@ -33,7 +40,8 @@
                              else
                                'success'
                              end %>
-                                <td class="<%= @class %>"><%= @mark %></td>
+                                    <td class="<%= @class %>"><%= @mark %></td>
+                                <% end %>
                             <% end %>
                         </tr>
                     <% end %>

@@ -40,10 +40,10 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+        format.html { redirect_to courses_path, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
-        format.html { render :edit }
+        format.html { render :index }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
@@ -77,7 +77,7 @@ class CoursesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def course_params
-    params.require(:course).permit(:year)
+    params.require(:course).permit(:year, :title)
   end
 
   def result_params

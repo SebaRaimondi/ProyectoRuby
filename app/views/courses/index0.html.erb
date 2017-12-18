@@ -1,3 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Courses</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Anio</th>
+            <th>Titulo</th>
+            <th colspan="3">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @courses.each do |course| %>
+            <tr>
+                <td><%= course.year %></td>
+                <td><%= course.title %></td>
+                <td><%= link_to 'Ver', course_path(course) %></td>
+                <td><%= link_to 'Editar', edit_course_path(course) %></td>
+                <td><%= link_to 'Eliminar', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course', new_course_path %>
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
 
 <br>
@@ -28,12 +58,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% @courses.each do |course| %>
+                            <% @exams.each do |exam| %>
                                 <tr>
                                     <td align="center">
-                                        <%= link_to '<em class="fa fa-eye"></em>'.html_safe, course_path(course), class: "btn btn-default" %>
-                                        <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_path(course), class: "btn btn-default" %>
-                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, course_path(course), :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %>
+                                        <%= link_to '<em class="fa fa-eye"></em>'.html_safe, course_path, class: "btn btn-default" %>
+                                        <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_exam_path(exam.course, exam), class: "btn btn-default" %>
+                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, course_path, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %>
                                     </td>
                                     <td><%= course.year %></td>
                                     <td><%= course.title %></td>
