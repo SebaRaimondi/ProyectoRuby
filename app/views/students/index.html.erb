@@ -34,7 +34,6 @@
                             <% @students.each do |s| %>
                                 <tr>
                                     <td align="center">
-                                        <%= link_to '<em class="fa fa-eye"></em>'.html_safe, [s.course, s], class: "btn btn-default" %>
                                         <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_student_path(s.course, s), class: "btn btn-default" %>
                                         <%= link_to '<em class="fa fa-trash"></em>'.html_safe, [s.course, s], :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %>
                                     </td>
