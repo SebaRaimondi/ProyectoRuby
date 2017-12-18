@@ -23,7 +23,7 @@
             <tbody>
                 <% @course.students.each do |s| %>
                     <tr>
-                        <td><%= s.name %></td>
+                        <td><%= "#{s.surname}, #{s.name}" %></td>
                         <% if @course.exams.empty? %>
                             <td></td>
                         <% else %>
@@ -79,7 +79,7 @@
                         <tbody>
                             <% @course.students.each do |s| %>
                                 <tr>
-                                    <td><%= s.name %></td>
+                                    <td><%= "#{s.surname}, #{s.name}" %></td>
                                     <% @course.exams.each do |e| %>
                                         <%
                                             @mark = e.students.include?(s) ? s.mark_for(e) : ''
