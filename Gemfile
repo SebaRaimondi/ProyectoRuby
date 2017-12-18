@@ -18,6 +18,8 @@ gem 'nested_scaffold'
 gem 'validates_email_format_of'
 gem 'json'
 gem 'bootstrap_form'
+gem "font-awesome-rails"
+
 # /Non-Default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

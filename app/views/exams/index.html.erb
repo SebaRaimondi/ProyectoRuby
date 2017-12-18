@@ -1,16 +1,8 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-
-<br>
 <div class="container">
     <div class="row">
-
-        <p></p>
-        <h1 style="text-align: center;"><%= ("Listado de examenes de la cursada " + @course.year.to_s).html_safe %></h1>
-
+        <h1 style="text-align: center;"><%= "Examenes de #{@course.title} - #{@course.year}".html_safe %></h1>
         <br>
-
         <div class="col-md-10 col-md-offset-1">
-
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="row">
@@ -18,7 +10,7 @@
                             <h3 class="panel-title">Examenes</h3>
                         </div>
                         <div class="col col-xs-6 text-right">
-                            <%= link_to '<button type="button" class="button">Nuevo Examen</button>'.html_safe, new_course_exam_path %>
+                            <%= button_to 'Nuevo Examen', new_course_exam_path, class: 'button', method: 'get' %>
                         </div>
                     </div>
                 </div>
@@ -52,7 +44,7 @@
 
                 </div>
             </div>
-            <%= link_to '<button type="button" class="button btn-red">Volver a Cursadas</button>'.html_safe, course_path(params[:course_id]) %>
+            <%= button_to 'Volver a Cursadas', course_path(params[:course_id]), class: 'button btn-red', method: 'get' %>
         </div>
     </div>
 </div>
