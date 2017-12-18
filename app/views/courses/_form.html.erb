@@ -1,28 +1,28 @@
-<%= form_with(model: course, local: true) do |form| %>
-<% if course.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(course.errors.count, "error") %>
-            prohibited this course from being saved:</h2>
+<div class="container">
+    <% if @course.id.blank? %>
+        <h1 class="center-helper">Nuevo Curso</h1>
+    <% else %>
+        <h1 class="center-helper">Editando Curso "<%= @course.title.to_s + " - " + @course.year.to_s %>"</h1>
+    <% end %>
+    <br>
+    <div class="col-md-6 col-sm-8">
+        <% if course.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(course.errors.count, "error") %>
+                    prohibited this course from being saved:</h2>
 
-        <ul>
-            <% course.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
-
-<div class="field">
-    <%= form.label :year %>
-    <%= form.number_field :year, id: :course_year %>
+                <ul>
+                    <% course.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <%= bootstrap_form_for(@course) do |f| %>
+        <%= f.number_field :year, id: :course_year, min: 2010, required: true %>
+        <%= f.text_field :title, id: :course_title, required: true %>
+        <%= f.submit "Submit", class: "button" %>
+        <%= link_to '<button type="button" class="button btn-red">Volver a Cursadas</button>'.html_safe, courses_path %>
+    <% end %>
 </div>
-
-<div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :course_title %>
 </div>
-
-<div class="actions">
-    <%= form.submit %>
-</div>
-<% end %>

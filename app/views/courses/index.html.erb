@@ -1,9 +1,7 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-
-<br>
 <div class="container">
     <div class="row">
         <h1 style="text-align: center;">Listado de Cursadas</h1>
+        <br>
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
@@ -33,7 +31,7 @@
                                     <td align="center">
                                         <%= link_to '<em class="fa fa-eye"></em>'.html_safe, course_path(course), class: "btn btn-default" %>
                                         <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_path(course), class: "btn btn-default" %>
-                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, course_path(course), :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %>
+                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, course_path(course), method: :delete, data: { confirm: "Estas seguro de eliminar el curso #{course.title} - #{course.year}?" }, class: "btn btn-danger" %>
                                     </td>
                                     <td><%= course.year %></td>
                                     <td><%= course.title %></td>
