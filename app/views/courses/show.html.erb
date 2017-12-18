@@ -1,7 +1,4 @@
 <div class="container">
-    <p id="notice"><%= notice %></p>
-</div>
-<div class="container">
     <div class="row">
         <h1 style="text-align: center;"><%= (@course.title.to_s + " - " + @course.year.to_s).html_safe %></h1>
     </div>
@@ -65,8 +62,8 @@
                         <span aria-hidden="true">&times;</span></button>
                     <h3 class="modal-title">Modificar Notas</h4>
                 </div>
+                <%= form_tag(course_results_path(@course), method: "post") do %>
                 <div class="modal-body">
-                    <%= form_tag("/courses/#{@course.id}/results", method: "post") do %>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>

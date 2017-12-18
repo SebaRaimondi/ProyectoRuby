@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :students
+    post 'results', to: 'courses#results'
   end
-  post '/courses/:id/results', to: 'courses#results'
 
   devise_for :users
 
