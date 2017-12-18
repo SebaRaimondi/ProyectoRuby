@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   resources :courses do
-    resources :exams
-  end
-
-  resources :courses do
-    resources :students
+    resources :exams, except: :show
+    resources :students, except: :show
     post 'results', to: 'courses#results'
   end
 
