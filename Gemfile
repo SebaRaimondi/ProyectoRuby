@@ -19,7 +19,7 @@ gem 'validates_email_format_of'
 gem 'json'
 gem 'bootstrap_form'
 gem "font-awesome-rails"
-
+gem "nested_form"
 # /Non-Default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
