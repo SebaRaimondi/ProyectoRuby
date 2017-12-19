@@ -3,7 +3,7 @@ class Student < ApplicationRecord
   has_many :results
   has_many :students, through: :results
 
-  dni_regex = /^[XYZ]?\d{5,8}[A-Z]$/
+  dni_regex = /\d{5,8}/
   number_regex = /\A[1-9]\d{0,6}.[\/][1-9]\d{0,2}\z/
 
   dni_message = 'El dni no es valido.'
