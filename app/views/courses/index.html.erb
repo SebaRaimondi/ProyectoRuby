@@ -10,7 +10,7 @@
                             <h3 class="panel-title">Cursadas</h3>
                         </div>
                         <div class="col col-xs-6 text-right">
-                            <%= link_to '<button type="button" class="button">Nueva Cursada</button>'.html_safe, new_course_path %>
+                            <%= link_to "Nueva Cursada", new_course_path, class: "button" %>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                                     <td align="center">
                                         <%= link_to '<em class="fa fa-eye"></em>'.html_safe, course_path(course), class: "btn btn-default" %>
                                         <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_path(course), class: "btn btn-default" %>
-                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, course_path(course), method: :delete, data: { confirm: "Estas seguro de eliminar el curso #{course.title} - #{course.year}?" }, class: "btn btn-danger" %>
+                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, course_path(course), method: :delete, data: { confirm: "Estas seguro de eliminar el curso #{course.full_title}?" }, class: "btn btn-danger" %>
                                     </td>
                                     <td><%= course.year %></td>
                                     <td><%= course.title %></td>

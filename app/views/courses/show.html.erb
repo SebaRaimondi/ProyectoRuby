@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center;"><%= (@course.title.to_s + " - " + @course.year.to_s).html_safe %></h1>
+        <h1 style="text-align: center;"><%= @course.full_title %></h1>
     </div>
     <br>
     <div class="row">
@@ -68,10 +68,10 @@
     </div>
     <div class="row" style="text-align: center">
         <div class="center-helper container">
-            <%= link_to "Volver a Cursadas", courses_path, class: "button btn-red", style: 'color: white;'%>
+            <%= link_to "Volver a Cursadas", courses_path, class: "button btn-red" %>
             <button type="button" class="button" data-toggle="modal" data-target="#resultsModal">Modificar Notas</button>
-            <%= link_to "Administrar Examenes", course_exams_path(@course), class: "button", style: 'color: white;'%>
-            <%= link_to "Administrar Alumnos", course_students_path(@course), class: "button", style: 'color: white;'%>
+            <%= link_to "Administrar Examenes", course_exams_path(@course), class: "button" %>
+            <%= link_to "Administrar Alumnos", course_students_path(@course), class: "button" %>
         </div>
     </div>
 </div>
@@ -80,7 +80,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <h3 class="modal-title">Modificar Notas</h4>
             </div>
             <%= form_tag(course_results_path(@course), method: "post") do %>
