@@ -27,17 +27,12 @@
                         <% if @course.exams.empty? %>
                             <td></td>
                         <% else %>
-                            <% @course.exams.each do |e|
-                                @mark = e.students.include?(s) ? s.mark_for(e) : "Ausente"
-                                @class = if (@mark == 'Ausente' || @mark == nil)
-                                    @mark = 'Ausente'
-                                   'warning'
-                                 elsif @mark < e.min
-                                   'danger'
-                                 else
-                                   'success'
-                                 end %>
-                                <td class="<%= @class %>"><%= @mark %></td>
+                            <% @course.exams.each do |e| %>
+                                <% if e.has_mark_for(s) %>
+                                    <td class="<%= e.passed?(s) ? 'success' : 'danger' %>"><%= e.mark_for(s) %></td>
+                                <% else %>
+                                    <td class="warning">Ausente</td>
+                                <% end %>
                             <% end %>
                         <% end %>
                     </tr>
@@ -46,25 +41,25 @@
                     <tr>
                         <td>Aprobados</td>
                         <% @course.exams.each do |e| %>
-                            <td><%= Result.passed(e.id, e.min).count %></td>
+                            <td><%= e.passed.count %></td>
                         <% end %>
                     </tr>
                     <tr>
                         <td>Desaprobados</td>
                         <% @course.exams.each do |e| %>
-                            <td><%= Result.failed(e.id, e.min).count %></td>
+                            <td><%= e.failed.count %></td>
                         <% end %>
                     </tr>
                     <tr>
                         <td>Ausentes</td>
                         <% @course.exams.each do |e| %>
-                            <td><%= @course.students.count - (Result.passed(e.id, e.min).count + Result.failed(e.id, e.min).count) %></td>
+                            <td><%= e.not_present.count %></td>
                         <% end %>
                     </tr>
                     <tr>
                         <td>Porcentaje de aprobacion</td>
                         <% @course.exams.each do |e| %>
-                            <td><%= ((Result.passed(e.id, e.min).count.to_f / (Result.passed(e.id, e.min).count + Result.failed(e.id, e.min).count)) * 100)%>%</td>
+                            <td><%= e.pass_percent %>%</td>
                         <% end %>
                     </tr>
                 <% end %>

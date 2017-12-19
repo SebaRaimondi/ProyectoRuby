@@ -14,7 +14,7 @@ class Course < ApplicationRecord
     # h.delete_if { |_key, value| value.empty? }
 
     h.each_pair do |key, val|
-      Exam.find(key).results(val)
+      Exam.find(key).update_results(val)
     end
   end
 end
