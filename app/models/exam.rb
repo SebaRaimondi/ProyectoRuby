@@ -3,6 +3,9 @@ class Exam < ApplicationRecord
   has_many :results
   has_many :students, through: :results
 
+  validates :title, presence: true, length: { maximum: 255 }
+  validates :min, presence: true, numericality: { moroe_than_or_equal_to: 0, only_integer: true }
+
   default_scope { order(date: :asc, title: :asc) }
 
   def results(params)
