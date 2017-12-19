@@ -26,7 +26,7 @@
         <%= f.email_field :email, required: true %>
         <div class="center-helper" style="width: 100%;">
             <%= f.submit "Confirmar", class: "button" %>
-            <%= link_to '<button type="button" class="button btn-red">Volver a Alumnos</button>'.html_safe, course_students_path %>
+            <%= link_to "Volver a Alumnos", course_students_path, class: "button btn-red" %>
         </div>
     <% end %>
 </div>

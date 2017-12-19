@@ -37,7 +37,7 @@
                                         <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_student_path(s.course, s), class: "btn btn-default" %>
                                         <%= link_to '<em class="fa fa-trash"></em>'.html_safe, [s.course, s], :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %>
                                     </td>
-                                    <td><%= s.surname + ", " + s.name %></td>
+                                    <td><%= s.full_name %></td>
                                     <td><%= s.dni %></td>
                                     <td><%= s.number %></td>
                                     <td><%= s.email %></td>
@@ -48,7 +48,7 @@
 
                 </div>
             </div>
-            <%= link_to '<button type="button" class="button btn-red">Volver a Cursada</button>'.html_safe, course_path(params[:course_id]) %>
+            <%= link_to "Volver a Cursada", course_path(params[:course_id]), class: "button btn-red" %>
         </div>
     </div>
 </div>
