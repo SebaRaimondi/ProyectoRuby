@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center;"><%= "Examenes de #{@course.title} - #{@course.year}" %></h1>
+        <h1 style="text-align: center;"><%= "Examenes de #{@course.full_title}" %></h1>
         <br>
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default panel-table">
@@ -10,7 +10,7 @@
                             <h3 class="panel-title">Examenes</h3>
                         </div>
                         <div class="col col-xs-6 text-right">
-                            <%= button_to 'Nuevo Examen', new_course_exam_path, class: 'button', method: 'get' %>
+                            <%= link_to "Nuevo Examen", new_course_exam_path, class: "button" %>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
 
                 </div>
             </div>
-            <%= button_to 'Volver a Cursadas', course_path(@course), class: 'button btn-red', method: 'get' %>
+            <%= link_to "Volver a Cursadas", course_path(@course), class: "button btn-red" %>
         </div>
     </div>
 </div>

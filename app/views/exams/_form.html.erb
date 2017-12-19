@@ -24,7 +24,7 @@
         <%= f.number_field :min, required: true, min: 0 %>
         <div class="center-helper" style="width: 100%;">
             <%= f.submit "Confirmar", class: "button" %>
-            <%= link_to '<button type="button" class="button btn-red">Volver a Examenes</button>'.html_safe, course_exams_path %>
+            <%= link_to "Volver a Examenes", course_exams_path, class: "button btn-red" %>
         </div>
     <% end %>
 </div>
