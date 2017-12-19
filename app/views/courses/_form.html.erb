@@ -2,7 +2,7 @@
     <% if @course.id.blank? %>
         <h1 style="text-align: center;">Nuevo Curso</h1>
     <% else %>
-        <h1 style="text-align: center;">Editando Curso "<%= @course.title.to_s + " - " + @course.year.to_s %>"</h1>
+        <h1 style="text-align: center;">Editando Curso "<%= @course.full_title %>"</h1>
     <% end %>
     <br>
     <div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
@@ -23,7 +23,7 @@
         <%= f.text_field :title, id: :course_title, required: true %>
         <div class="center-helper" style="width: 100%;">
             <%= f.submit "Submit", class: "button" %>
-            <%= link_to '<button type="button" class="button btn-red">Volver a Cursadas</button>'.html_safe, courses_path %>
+            <%= link_to "Volver a Cursadas", courses_path, class: "button btn-red" %>
         </div>
     <% end %>
 </div>

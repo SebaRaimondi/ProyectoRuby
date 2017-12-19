@@ -17,4 +17,8 @@ class Course < ApplicationRecord
       Exam.find(key).update_results(val)
     end
   end
+
+  def full_title
+    "#{title} - #{year}"
+  end
 end
