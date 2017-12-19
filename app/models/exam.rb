@@ -8,7 +8,7 @@ class Exam < ApplicationRecord
 
   default_scope { order(date: :asc, title: :asc) }
 
-  def results_update(params)
+  def update_results(params)
     params.each_pair do |key, val|
       s = Student.find(key)
       r = Result.for(s, self).first

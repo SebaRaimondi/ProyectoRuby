@@ -28,4 +28,8 @@ class Student < ApplicationRecord
   def mark_for(exam)
     (Result.for self, exam).first.mark
   end
+
+  def full_name
+    "#{surname}, #{name}"
+  end
 end
