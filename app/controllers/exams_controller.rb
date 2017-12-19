@@ -40,9 +40,12 @@ class ExamsController < ApplicationController
 
   # DELETE courses/1/exams/1
   def destroy
-    @exam.destroy
-
-    redirect_to course_exams_url(@course)
+    if @exam.results.empty?
+      @exam.destroy
+      redirect_to(course_exams_url(@course), notice: 'El examen se elimino exitosamente.')
+    else
+      redirect_to(course_exams_url(@course), notice: 'El examen no se elimino porque tiene notas asociadas.')
+    end
   end
 
   private
