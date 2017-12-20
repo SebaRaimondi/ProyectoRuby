@@ -31,7 +31,11 @@ class Exam < ApplicationRecord
   end
 
   def date_validation
-    errors.add(:date, 'La fecha ingresada es invalida. Debe ser del mismo anio que el curso.') unless date.between?(Date.new(course.year), Date.new(course.year + 1))
+    errors.add(:date, 'La fecha no es valida.') unless date_valid?
+  end
+
+  def date_valid?
+    date.between?(Date.new(course.year), Date.new(course.year + 1))
   end
 
   def mark_for(s)

@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
   has_many :exams
   has_many :students
+
   validates :year, presence: true, numericality: :only_integer
   validates :title, presence: true, length: { maximum: 255 }
 
