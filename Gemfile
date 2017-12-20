@@ -20,6 +20,7 @@ gem 'json'
 gem 'bootstrap_form'
 gem "font-awesome-rails"
 gem "nested_form"
+gem 'validates_timeliness', '~> 4.0'
 # /Non-Default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

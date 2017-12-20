@@ -25,6 +25,13 @@ class Student < ApplicationRecord
 
   default_scope { order(surname: :asc, name: :asc) }
 
+  before_save :titleize_names
+
+  def titleize_names
+    self.name = name.titleize
+    self.surname = surname.titleize
+  end
+
   def mark_for(exam)
     (Result.for self, exam).first.mark
   end

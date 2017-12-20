@@ -6,19 +6,19 @@ class Course < ApplicationRecord
 
   default_scope { order(year: :asc, title: :asc) }
 
-  def update_results(params)
-    h = params
-    # h.each_pair do |_key, val|
-    # val.delete_if { |_key, value| value.blank? }
-    # end
-    # h.delete_if { |_key, value| value.empty? }
+  before_save :titleize_title
 
-    h.each_pair do |key, val|
-      Exam.find(key).update_results(val)
+  def update_results(params)
+    params.each_pair do |key, val|
+      exams.where(id: key).first.update_results(val)
     end
   end
 
   def full_title
     "#{title} - #{year}"
+  end
+
+  def titleize_title
+    self.title = title.titleize
   end
 end

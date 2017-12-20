@@ -20,7 +20,7 @@
         <% end %>
         <%= bootstrap_form_for([@exam.course, @exam]) do |f| %>
         <%= f.text_field :title, :autofocus => true, required: true %>
-        <%= f.date_select :date, discard_year: true %>
+        <%= f.date_select :date, discard_year: true, default: { year: @exam.course.year } %>
         <%= f.number_field :min, required: true, min: 0 %>
         <div class="center-helper" style="width: 100%;">
             <%= f.submit "Confirmar", class: "button" %>

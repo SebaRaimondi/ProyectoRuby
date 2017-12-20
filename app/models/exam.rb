@@ -4,21 +4,34 @@ class Exam < ApplicationRecord
   has_many :students, through: :results
 
   validates :title, presence: true, length: { maximum: 255 }
-  validates :min, presence: true, numericality: { moroe_than_or_equal_to: 0, only_integer: true }
+
+  validates :min, presence: true,
+                  numericality: { moroe_than_or_equal_to: 0, only_integer: true }
+
+  validate :date_validation
 
   default_scope { order(date: :asc, title: :asc) }
 
+  before_save :titleize_title
+
+  def titleize_title
+    self.title = title.titleize
+  end
+
   def update_results(params)
     params.each_pair do |key, val|
-      s = Student.find(key)
-      r = Result.for(s, self).first
+      r = results.where(exam_id: id, student_id: key).first
       if r
         r.mark = val
         r.save
       else
-        Result.create(student_id: s.id, exam_id: id, mark: val)
+        Result.create(student_id: key, exam_id: id, mark: val)
       end
     end
+  end
+
+  def date_validation
+    errors.add(:date, 'La fecha ingresada es invalida. Debe ser del mismo anio que el curso.') unless date.between?(Date.new(course.year), Date.new(course.year + 1))
   end
 
   def mark_for(s)
