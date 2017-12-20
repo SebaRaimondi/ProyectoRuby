@@ -38,13 +38,20 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
-    respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to courses_path, notice: 'Course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course }
-      else
-        format.html { render :index }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+    if @course.exams.empty?
+      respond_to do |format|
+        if @course.update(course_params)
+          format.html { redirect_to courses_path, notice: 'Course was successfully updated.' }
+          format.json { render :show, status: :ok, location: @course }
+        else
+          format.html { render :index }
+          format.json { render json: @course.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to courses_url, notice: 'El curso no pudo actualizarse porque tiene examenes.' }
+        format.json { head :no_content }
       end
     end
   end
