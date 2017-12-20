@@ -21,12 +21,13 @@ gem 'bootstrap_form'
 gem "font-awesome-rails"
 gem "nested_form"
 gem 'validates_timeliness', '~> 4.0'
+gem 'pg'
 # /Non-Default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20171218185552) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "courses", force: :cascade do |t|
     t.integer "year"
     t.datetime "created_at", null: false
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 20171218185552) do
   end
 
   create_table "exams", force: :cascade do |t|
-    t.integer "course_id"
+    t.bigint "course_id"
     t.string "title"
     t.date "date"
     t.integer "min"
@@ -31,8 +34,8 @@ ActiveRecord::Schema.define(version: 20171218185552) do
 
   create_table "results", force: :cascade do |t|
     t.integer "mark"
-    t.integer "exam_id"
-    t.integer "student_id"
+    t.bigint "exam_id"
+    t.bigint "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exam_id"], name: "index_results_on_exam_id"
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20171218185552) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.integer "course_id"
+    t.bigint "course_id"
     t.string "surname"
     t.string "name"
     t.string "dni"
@@ -68,4 +71,8 @@ ActiveRecord::Schema.define(version: 20171218185552) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "exams", "courses"
+  add_foreign_key "results", "exams"
+  add_foreign_key "results", "students"
+  add_foreign_key "students", "courses"
 end
