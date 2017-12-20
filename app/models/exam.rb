@@ -43,7 +43,7 @@ class Exam < ApplicationRecord
   end
 
   def has_mark_for(s)
-    !results.where(student_id: s.id).where('mark <> ""').empty?
+    !results.where(student_id: s.id).where.not(mark: nil).empty?
   end
 
   def passed?(s)
