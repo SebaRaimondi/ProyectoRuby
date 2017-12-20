@@ -35,7 +35,7 @@
                                 <tr>
                                     <td align="center">
                                         <%= link_to '<em class="fa fa-pencil"></em>'.html_safe, edit_course_student_path(s.course, s), class: "btn btn-default" %>
-                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, [s.course, s], data: { confirm: "Estas seguro de eliminar el alumno #{student.full_name}?" }, :method => :delete, class: "btn btn-danger" %>
+                                        <%= link_to '<em class="fa fa-trash"></em>'.html_safe, [s.course, s], data: { confirm: "Estas seguro de eliminar el alumno #{s.full_name}?" }, :method => :delete, class: "btn btn-danger" %>
                                     </td>
                                     <td><%= s.full_name %></td>
                                     <td><%= s.dni %></td>
