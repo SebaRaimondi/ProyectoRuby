@@ -4,15 +4,19 @@
 
 1. En la consola navegar hasta la carpeta del proyecto.
 
-2. Asegurarse de tener instalada la gema `bundler`. Puede instalarla ejecutando el comando `gem install bundler`.
+2. Asegurarse de tener instalado [Ruby](https://www.ruby-lang.org/es/).
 
-3. Ejecutar `bundler install` para instalar todas las dependencias del proyecto.
+3. Asegurarse de tener instalado [PostgreSQL](https://www.postgresql.org/).
 
-4. Ejecutar el comando `rake db:setup` para cargar la base de datos con los datos de ejemplo.
+4. Asegurarse de tener instalada la gema `bundler`. Puede instalarla ejecutando el comando `gem install bundler`.
 
-5. Ejecutar el comando `rails s` para encender el servidor.
+5. Ejecutar `bundler install` para instalar todas las dependencias del proyecto.
 
-6. Ingresar a `localhost:3000` y loguearse con las credenciales que les envie por catedras.
+6. Ejecutar el comando `rake db:setup` para cargar la base de datos con los datos de ejemplo.
+
+7. Ejecutar el comando `rails s` para encender el servidor.
+
+8. Ingresar a `localhost:3000` y loguearse con las credenciales que les envie por catedras.
 
 ## Tests
 
