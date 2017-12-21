@@ -6,7 +6,7 @@ one:
   name: Sebastian
   dni: 40345182
   number: 21755/8
-  email: ejemplo@ejemplo.com
+  email: example@example.com
 
 two:
   course: one
@@ -16,7 +16,7 @@ two:
   number: 12345/6
   email: example@example.com
 
-one:
+three:
   course: one
   surname: Brost
   name: Pedro
