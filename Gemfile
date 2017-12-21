@@ -22,6 +22,7 @@ gem "font-awesome-rails"
 gem "nested_form"
 gem 'validates_timeliness', '~> 4.0'
 gem 'pg'
+gem 'seed_dump'
 # /Non-Default gems
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
