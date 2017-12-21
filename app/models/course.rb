@@ -2,7 +2,10 @@ class Course < ApplicationRecord
   has_many :exams
   has_many :students
 
-  validates :year, presence: true, numericality: :only_integer
+  validates :year, presence: true,
+                   numericality: { only_integer: true, greater_than: 0 },
+                   length: { maximum: 4, minimum: 4 }
+
   validates :title, presence: true, length: { maximum: 255 }
 
   default_scope { order(year: :asc, title: :asc) }
