@@ -4,9 +4,9 @@
 
 1. En la consola navegar hasta la carpeta del proyecto.
 
-2. Asegurarse de tener instalado [Ruby](https://www.ruby-lang.org/es/).
+2. Asegurarse de tener instalado [Ruby](https://www.ruby-lang.org/es/). Aplicacion desarrollada usando ruby 2.4.2p198
 
-3. Asegurarse de tener instalado [PostgreSQL](https://www.postgresql.org/).
+3. Asegurarse de tener instalado [PostgreSQL](https://www.postgresql.org/). Aplicacion desarrollada usando PostgreSQL 9.6.6
 
 4. Asegurarse de tener instalada la gema `bundler`. Puede instalarla ejecutando el comando `gem install bundler`.
 
