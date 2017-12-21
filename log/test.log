@@ -9005,3 +9005,630 @@ ExamTest: test_should_not_save_if_year_is_not_the_same_as_course_year
   [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
   [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
   [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (1.1ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Raimondi', 'Sebastian', '40345182', '21755/8', 'example@example.com', '2017-12-21 20:20:46.934679', '2017-12-21 20:20:46.934679', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 20:20:46.934679', '2017-12-21 20:20:46.934679', 298486374, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 20:20:46.934679', '2017-12-21 20:20:46.934679', 113629430, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 20:20:46.951036', '2017-12-21 20:20:46.951036', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 20:20:46.951036', '2017-12-21 20:20:46.951036', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 20:20:46.951036', '2017-12-21 20:20:46.951036', 926834398)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 20:20:46.959232', '2017-12-21 20:20:46.959232', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (5, '2017-12-21 20:20:46.959232', '2017-12-21 20:20:46.959232', 298486374, 980190962, 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 20:20:46.959232', '2017-12-21 20:20:46.959232', 113629430, 980190962, 113629430)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 20:20:46.959232', '2017-12-21 20:20:46.959232', 281110143, 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "exams"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "exams" ("title", "date", "min", "created_at", "updated_at", "id", "course_id") VALUES ('Exam 1', '2017-12-10', 5, '2017-12-21 20:20:46.967737', '2017-12-21 20:20:46.967737', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "exams" ("title", "date", "min", "created_at", "updated_at", "id", "course_id") VALUES ('Exam 2', '2017-12-11', 10, '2017-12-21 20:20:46.967737', '2017-12-21 20:20:46.967737', 298486374, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "exams" ("title", "date", "min", "created_at", "updated_at", "id", "course_id") VALUES ('Exam 3', '2017-12-12', 13, '2017-12-21 20:20:46.967737', '2017-12-21 20:20:46.967737', 113629430, 980190962)[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "results" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "exams" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------
+ExamTest: test_should_associate_course
+--------------------------------------
+  [1m[36mExam Load (0.4ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ExamTest: test_should_return_pass_percentage
+--------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+ExamTest: test_should_not_save_if_min_is_negative
+-------------------------------------------------
+  [1m[36mExam Load (0.3ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+ExamTest: test_should_say_if_has_mark_for
+-----------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 298486374], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 298486374], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------
+ExamTest: test_should_associate_students
+----------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1[0m  [["exam_id", 980190962]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 298486374], ["id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+ExamTest: test_should_get_mark_for_student
+------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+ExamTest: test_should_not_save_if_date_is_not_present
+-----------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------
+ExamTest: test_should_not_save_if_min_is_not_integer
+----------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ExamTest: test_should_return_passed_students
+--------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------
+ExamTest: test_should_not_save_if_min_is_not_present
+----------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------
+ExamTest: test_should_not_save_if_year_is_not_the_same_as_course_year
+---------------------------------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (1.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+ExamTest: test_should_return_not_present_students
+-------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" WHERE "students"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 10)[0m  [["exam_id", 298486374]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 10)[0m  [["exam_id", 298486374]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ExamTest: test_should_titleize_title_before_save
+------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "exams" SET "title" = $1, "updated_at" = $2 WHERE "exams"."id" = $3[0m  [["title", "Soy Un Titulo"], ["updated_at", "2017-12-21 20:20:47.119707"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------
+ExamTest: test_should_associate_results
+---------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1[0m  [["exam_id", 980190962]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 281110143], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 281110143], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1[0m  [["exam_id", 298486374]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ExamTest: test_should_return_failed_students
+--------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ExamTest: test_should_say_if_student_passed
+-------------------------------------------
+  [1m[36mExam Load (0.5ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 298486374], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+ExamTest: test_should_not_save_if_title_is_not_present
+------------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------
+ResultTest: test_mark_can_be_nil
+--------------------------------
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 ORDER BY "exams"."date" ASC, "exams"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 ORDER BY "students"."surname" ASC, "students"."name" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "results" SET "mark" = $1, "updated_at" = $2 WHERE "results"."id" = $3[0m  [["mark", nil], ["updated_at", "2017-12-21 20:20:47.159348"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ResultTest: test_mark_can_only_be_integer_or_nil
+------------------------------------------------
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 ORDER BY "exams"."date" ASC, "exams"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 ORDER BY "students"."surname" ASC, "students"."name" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------
+ResultTest: test_mark_cant_be_negative
+--------------------------------------
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 ORDER BY "exams"."date" ASC, "exams"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 ORDER BY "students"."surname" ASC, "students"."name" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "results" SET "mark" = $1, "updated_at" = $2 WHERE "results"."id" = $3[0m  [["mark", -2], ["updated_at", "2017-12-21 20:20:47.174941"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+CourseTest: test_should_associate_students
+------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" WHERE "students"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."course_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."course_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."course_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------
+CourseTest: test_should_not_save_if_year_has_less_than_4_digits
+---------------------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------
+CourseTest: test_should_build_full_title
+----------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+CourseTest: test_should_not_save_if_year_is_not_present
+-------------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+CourseTest: test_should_titleize_title_before_save
+--------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "courses" SET "title" = $1, "updated_at" = $2 WHERE "courses"."id" = $3[0m  [["title", "Soy Un Titulo"], ["updated_at", "2017-12-21 20:20:47.194322"], ["id", 980190962]]
+  [1m[35m (2.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------
+CourseTest: test_should_associate_exams
+---------------------------------------
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "exams" WHERE "exams"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mExam Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = $1 AND "exams"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mExam Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = $1 AND "exams"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mExam Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = $1 AND "exams"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+CourseTest: test_should_not_save_if_title_is_not_present
+--------------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------
+CourseTest: test_should_not_save_if_year_is_negative
+----------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+CourseTest: test_should_not_save_if_year_is_not_integer
+-------------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Raimondi', 'Sebastian', '40345182', '21755/8', 'example@example.com', '2017-12-21 20:21:03.390663', '2017-12-21 20:21:03.390663', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 20:21:03.390663', '2017-12-21 20:21:03.390663', 298486374, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 20:21:03.390663', '2017-12-21 20:21:03.390663', 113629430, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 20:21:03.403101', '2017-12-21 20:21:03.403101', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 20:21:03.403101', '2017-12-21 20:21:03.403101', 298486374)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 20:21:03.403101', '2017-12-21 20:21:03.403101', 926834398)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 20:21:03.411380', '2017-12-21 20:21:03.411380', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (5, '2017-12-21 20:21:03.411380', '2017-12-21 20:21:03.411380', 298486374, 980190962, 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 20:21:03.411380', '2017-12-21 20:21:03.411380', 113629430, 980190962, 113629430)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 20:21:03.411380', '2017-12-21 20:21:03.411380', 281110143, 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "exams"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "exams" ("title", "date", "min", "created_at", "updated_at", "id", "course_id") VALUES ('Exam 1', '2017-12-10', 5, '2017-12-21 20:21:03.420317', '2017-12-21 20:21:03.420317', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "exams" ("title", "date", "min", "created_at", "updated_at", "id", "course_id") VALUES ('Exam 2', '2017-12-11', 10, '2017-12-21 20:21:03.420317', '2017-12-21 20:21:03.420317', 298486374, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "exams" ("title", "date", "min", "created_at", "updated_at", "id", "course_id") VALUES ('Exam 3', '2017-12-12', 13, '2017-12-21 20:21:03.420317', '2017-12-21 20:21:03.420317', 113629430, 980190962)[0m
+  [1m[35m (9.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "results" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "exams" ENABLE TRIGGER ALL;ALTER TABLE "courses" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------
+CourseTest: test_should_associate_exams
+---------------------------------------
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "exams" WHERE "exams"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[36mExam Load (0.3ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mExam Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = $1 AND "exams"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mExam Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = $1 AND "exams"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mExam Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "exams" WHERE "exams"."course_id" = $1 AND "exams"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+CourseTest: test_should_not_save_if_year_is_not_integer
+-------------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+CourseTest: test_should_associate_students
+------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" WHERE "students"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."course_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."course_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" WHERE "students"."course_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["course_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+CourseTest: test_should_titleize_title_before_save
+--------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "courses" SET "title" = $1, "updated_at" = $2 WHERE "courses"."id" = $3[0m  [["title", "Soy Un Titulo"], ["updated_at", "2017-12-21 20:21:03.511725"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------
+CourseTest: test_should_not_save_if_year_has_less_than_4_digits
+---------------------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------
+CourseTest: test_should_build_full_title
+----------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.0ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------------
+CourseTest: test_should_not_save_if_title_is_not_present
+--------------------------------------------------------
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------------
+CourseTest: test_should_not_save_if_year_is_not_present
+-------------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------
+CourseTest: test_should_not_save_if_year_is_negative
+----------------------------------------------------
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------
+ExamTest: test_should_not_save_if_min_is_not_present
+----------------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------
+ExamTest: test_should_associate_students
+----------------------------------------
+  [1m[36mExam Load (0.4ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1[0m  [["exam_id", 980190962]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "students" INNER JOIN "results" ON "students"."id" = "results"."student_id" WHERE "results"."exam_id" = $1 AND "students"."id" = $2 LIMIT $3[0m  [["exam_id", 298486374], ["id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+ExamTest: test_should_not_save_if_min_is_negative
+-------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ExamTest: test_should_return_failed_students
+--------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ExamTest: test_should_return_pass_percentage
+--------------------------------------------
+  [1m[36mExam Load (0.5ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ExamTest: test_should_titleize_title_before_save
+------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "exams" SET "title" = $1, "updated_at" = $2 WHERE "exams"."id" = $3[0m  [["title", "Soy Un Titulo"], ["updated_at", "2017-12-21 20:21:03.579948"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------------
+ExamTest: test_should_not_save_if_date_is_not_present
+-----------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+ExamTest: test_should_not_save_if_title_is_not_present
+------------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ExamTest: test_should_say_if_student_passed
+-------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 298486374], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------
+ExamTest: test_should_associate_course
+--------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------------------------
+ExamTest: test_should_not_save_if_year_is_not_the_same_as_course_year
+---------------------------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+ExamTest: test_should_say_if_has_mark_for
+-----------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 298486374], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 AND ("results"."mark" IS NOT NULL) LIMIT $3[0m  [["exam_id", 298486374], ["student_id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+ExamTest: test_should_get_mark_for_student
+------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.3ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.4ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."exam_id" = $1 AND "results"."student_id" = $2 ORDER BY "results"."id" ASC LIMIT $3[0m  [["exam_id", 980190962], ["student_id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------------
+ExamTest: test_should_return_not_present_students
+-------------------------------------------------
+  [1m[36mExam Load (0.8ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "students" WHERE "students"."course_id" = $1[0m  [["course_id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 10)[0m  [["exam_id", 298486374]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark < 10)[0m  [["exam_id", 298486374]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ExamTest: test_should_return_passed_students
+--------------------------------------------
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1 AND (mark >= 5)[0m  [["exam_id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------
+ExamTest: test_should_not_save_if_min_is_not_integer
+----------------------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = $1 ORDER BY "courses"."year" ASC, "courses"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------
+ExamTest: test_should_associate_results
+---------------------------------------
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1[0m  [["exam_id", 980190962]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 980190962], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 298486374], ["LIMIT", 1]]
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 113629430], ["LIMIT", 1]]
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 281110143], ["LIMIT", 1]]
+  [1m[36mResult Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "results" WHERE "results"."exam_id" = $1 AND "results"."id" = $2 LIMIT $3[0m  [["exam_id", 980190962], ["id", 281110143], ["LIMIT", 1]]
+  [1m[36mExam Load (0.1ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "results" WHERE "results"."exam_id" = $1[0m  [["exam_id", 298486374]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------
+ResultTest: test_mark_can_be_nil
+--------------------------------
+  [1m[36mResult Load (0.1ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mExam Load (0.3ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 ORDER BY "exams"."date" ASC, "exams"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 ORDER BY "students"."surname" ASC, "students"."name" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "results" SET "mark" = $1, "updated_at" = $2 WHERE "results"."id" = $3[0m  [["mark", nil], ["updated_at", "2017-12-21 20:21:03.662719"], ["id", 980190962]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ResultTest: test_mark_can_only_be_integer_or_nil
+------------------------------------------------
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mExam Load (0.2ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 ORDER BY "exams"."date" ASC, "exams"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 ORDER BY "students"."surname" ASC, "students"."name" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------
+ResultTest: test_mark_cant_be_negative
+--------------------------------------
+  [1m[36mResult Load (0.2ms)[0m  [1m[34mSELECT  "results".* FROM "results" WHERE "results"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mExam Load (0.3ms)[0m  [1m[34mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = $1 ORDER BY "exams"."date" ASC, "exams"."title" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 ORDER BY "students"."surname" ASC, "students"."name" ASC LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
