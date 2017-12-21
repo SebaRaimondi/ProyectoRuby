@@ -6,8 +6,10 @@ class Exam < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
 
   validates :min, presence: true,
-                  numericality: { moroe_than_or_equal_to: 0, only_integer: true }
+                  numericality: { greater_than_or_equal_to: 0,
+                                  only_integer: true }
 
+  validates :date, presence: true
   validate :date_validation
 
   default_scope { order(date: :asc, title: :asc) }
@@ -35,7 +37,7 @@ class Exam < ApplicationRecord
   end
 
   def date_valid?
-    date.between?(Date.new(course.year), Date.new(course.year + 1))
+    date.try { |d| d.between?(Date.new(course.year), Date.new(course.year + 1)) }
   end
 
   def mark_for(s)
@@ -59,7 +61,7 @@ class Exam < ApplicationRecord
   end
 
   def not_present
-    results - (passed + failed)
+    course.students.size - (passed.size + failed.size)
   end
 
   def pass_percent

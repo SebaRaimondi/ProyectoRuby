@@ -14,3 +14,8 @@ three:
   mark: 6
   exam: one
   student: three
+
+four:
+  mark: 6
+  exam: two
+  student: one

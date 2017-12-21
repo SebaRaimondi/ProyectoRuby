@@ -3,13 +3,13 @@
 one:
   course: one
   title: Exam 1
-  date: 2017-12-12
+  date: 2017-12-10
   min: 5
 
 two:
   course: one
   title: Exam 2
-  date: 2017-12-12
+  date: 2017-12-11
   min: 10
 
 three:

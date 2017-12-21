@@ -37,7 +37,7 @@ class CourseTest < ActiveSupport::TestCase
     assert_not course.save
   end
 
-  test 'should titleize title' do
+  test 'should titleize title before save' do
     course = courses(:one)
     course.title = 'soy un titulo'
     course.save
