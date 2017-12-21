@@ -8,4 +8,12 @@
 
 3. Ejecutar `bundler install` para instalar todas las dependencias del proyecto.
 
-4. Ejecutar el comando `rake db:setup`
+4. Ejecutar el comando `rake db:setup` para cargar la base de datos con los datos de ejemplo.
+
+5. Ejecutar el comando `rails s` para encender el servidor.
+
+6. Ingresar a `localhost:3000` y loguearse con las credenciales que les envie por catedras.
+
+## Tests
+
+Para ejecutar los tests simplemente ejecute el comando `rails t` dentro de la carpeta de proyecto.
