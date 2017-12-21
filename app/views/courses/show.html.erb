@@ -53,7 +53,7 @@
                     <tr>
                         <td>Ausentes</td>
                         <% @course.exams.each do |e| %>
-                            <td><%= e.not_present.count %></td>
+                            <td><%= e.not_present %></td>
                         <% end %>
                     </tr>
                     <tr>
