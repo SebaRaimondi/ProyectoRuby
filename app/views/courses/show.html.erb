@@ -59,7 +59,7 @@
                     <tr>
                         <td>Porcentaje de aprobacion</td>
                         <% @course.exams.each do |e| %>
-                            <td><%= e.pass_percent %>%</td>
+                            <td><%= e.pass_percent.round(2) %>%</td>
                         <% end %>
                     </tr>
                 <% end %>
