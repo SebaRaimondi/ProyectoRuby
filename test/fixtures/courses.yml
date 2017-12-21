@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  year: 1
+  year: 2017
+  title: Curso 1
 
 two:
-  year: 1
+  year: 2018
+  title: Curso 2
+
+tree:
+  year: 2019
+  title: Curso 3

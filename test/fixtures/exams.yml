@@ -2,12 +2,18 @@
 
 one:
   course: one
-  title: MyString
+  title: Exam 1
   date: 2017-12-12
-  min: 1
+  min: 5
 
 two:
-  course: two
-  title: MyString
+  course: one
+  title: Exam 2
   date: 2017-12-12
-  min: 1
+  min: 10
+
+three:
+  course: one
+  title: Exam 3
+  date: 2017-12-12
+  min: 13

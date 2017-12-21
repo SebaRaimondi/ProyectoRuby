@@ -2,16 +2,24 @@
 
 one:
   course: one
-  surname: MyString
-  name: MyString
-  dni: MyString
-  number: MyString
-  email: MyString
+  surname: Raimondi
+  name: Sebastian
+  dni: 40345182
+  number: 21755/8
+  email: ejemplo@ejemplo.com
 
 two:
-  course: two
-  surname: MyString
-  name: MyString
-  dni: MyString
-  number: MyString
-  email: MyString
+  course: one
+  surname: borrelli
+  name: franco
+  dni: 12345678
+  number: 12345/6
+  email: example@example.com
+
+one:
+  course: one
+  surname: Brost
+  name: Pedro
+  dni: 98765432
+  number: 98765/4
+  email: example@example.com
