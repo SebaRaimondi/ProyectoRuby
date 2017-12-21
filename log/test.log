@@ -1,0 +1,908 @@
+  [1m[35m (128.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "test"[0m
+  [1m[35m (600.4ms)[0m  [1m[35mCREATE DATABASE "test" ENCODING = 'utf8'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "courses" CASCADE[0m
+  [1m[35m (27.8ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "year" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "title" character varying)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "exams" CASCADE[0m
+  [1m[35m (12.2ms)[0m  [1m[35mCREATE TABLE "exams" ("id" bigserial primary key, "course_id" bigint, "title" character varying, "date" date, "min" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE  INDEX  "index_exams_on_course_id" ON "exams"  ("course_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "results" CASCADE[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "results" ("id" bigserial primary key, "mark" integer, "exam_id" bigint, "student_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE  INDEX  "index_results_on_exam_id" ON "results"  ("exam_id")[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE  INDEX  "index_results_on_student_id" ON "results"  ("student_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (14.5ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "course_id" bigint, "surname" character varying, "name" character varying, "dni" character varying, "number" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE  INDEX  "index_students_on_course_id" ON "students"  ("course_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (14.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (3.7ms)[0m  [1m[35mALTER TABLE "exams" ADD CONSTRAINT "fk_rails_66aea76c6a"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+[0m
+  [1m[35m (2.8ms)[0m  [1m[35mALTER TABLE "results" ADD CONSTRAINT "fk_rails_05bc8be9c8"
+FOREIGN KEY ("exam_id")
+  REFERENCES "exams" ("id")
+[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "results" ADD CONSTRAINT "fk_rails_6cc04affd2"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "students" ADD CONSTRAINT "fk_rails_a258d82422"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171218185552)[0m
+  [1m[35m (2.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20171213020859),
+(20171212053016),
+(20171213020950),
+(20171213021033),
+(20171216201840);
+
+[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2017-12-21 18:30:59.847194"], ["updated_at", "2017-12-21 18:30:59.847194"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.9ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (1.1ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:30:59.938861', '2017-12-21 18:30:59.938861', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:30:59.955254', '2017-12-21 18:30:59.955254', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:30:59.964381', '2017-12-21 18:30:59.964381', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (1.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:30:59.972566', '2017-12-21 18:30:59.972566', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:30:59.988714', '2017-12-21 18:30:59.988714', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:30:59.998089', '2017-12-21 18:30:59.998089', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.006633', '2017-12-21 18:31:00.006633', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (1.1ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.023393', '2017-12-21 18:31:00.023393', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.034420', '2017-12-21 18:31:00.034420', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.042056', '2017-12-21 18:31:00.042056', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (1.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.050333', '2017-12-21 18:31:00.050333', 980190962, 980190962)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.063059', '2017-12-21 18:31:00.063059', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.071073', '2017-12-21 18:31:00.071073', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.078622', '2017-12-21 18:31:00.078622', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.089998', '2017-12-21 18:31:00.089998', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.108808', '2017-12-21 18:31:00.108808', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.117090', '2017-12-21 18:31:00.117090', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.130314', '2017-12-21 18:31:00.130314', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.139764', '2017-12-21 18:31:00.139764', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.147825', '2017-12-21 18:31:00.147825', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (1.7ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.155779', '2017-12-21 18:31:00.155779', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.172659', '2017-12-21 18:31:00.172659', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.339299', '2017-12-21 18:31:00.339299', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (6.4ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.349298', '2017-12-21 18:31:00.349298', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (1.1ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.366141', '2017-12-21 18:31:00.366141', 980190962, 980190962)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.378197', '2017-12-21 18:31:00.378197', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.385619', '2017-12-21 18:31:00.385619', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.392965', '2017-12-21 18:31:00.392965', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:31:00.406674', '2017-12-21 18:31:00.406674', 980190962, 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.533065', '2017-12-21 18:37:09.533065', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.533065', '2017-12-21 18:37:09.533065', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.550266', '2017-12-21 18:37:09.550266', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.550266', '2017-12-21 18:37:09.550266', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.550266', '2017-12-21 18:37:09.550266', 926834398)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.558820', '2017-12-21 18:37:09.558820', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.558820', '2017-12-21 18:37:09.558820', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.567072', '2017-12-21 18:37:09.567072', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.567072', '2017-12-21 18:37:09.567072', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.580533', '2017-12-21 18:37:09.580533', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.580533', '2017-12-21 18:37:09.580533', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.585331', '2017-12-21 18:37:09.585331', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.585331', '2017-12-21 18:37:09.585331', 298486374)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.585331', '2017-12-21 18:37:09.585331', 926834398)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.594577', '2017-12-21 18:37:09.594577', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.594577', '2017-12-21 18:37:09.594577', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.600612', '2017-12-21 18:37:09.600612', 980190962)[0m
+  [1m[36mFixture Insert (2.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.600612', '2017-12-21 18:37:09.600612', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.616028', '2017-12-21 18:37:09.616028', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.616028', '2017-12-21 18:37:09.616028', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.620732', '2017-12-21 18:37:09.620732', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.620732', '2017-12-21 18:37:09.620732', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.620732', '2017-12-21 18:37:09.620732', 926834398)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.625300', '2017-12-21 18:37:09.625300', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.625300', '2017-12-21 18:37:09.625300', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.628888', '2017-12-21 18:37:09.628888', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.628888', '2017-12-21 18:37:09.628888', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.641270', '2017-12-21 18:37:09.641270', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.641270', '2017-12-21 18:37:09.641270', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.650525', '2017-12-21 18:37:09.650525', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.650525', '2017-12-21 18:37:09.650525', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.650525', '2017-12-21 18:37:09.650525', 926834398)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.654927', '2017-12-21 18:37:09.654927', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.654927', '2017-12-21 18:37:09.654927', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.659113', '2017-12-21 18:37:09.659113', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.659113', '2017-12-21 18:37:09.659113', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.668435', '2017-12-21 18:37:09.668435', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.668435', '2017-12-21 18:37:09.668435', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.674923', '2017-12-21 18:37:09.674923', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.674923', '2017-12-21 18:37:09.674923', 298486374)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.674923', '2017-12-21 18:37:09.674923', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.685233', '2017-12-21 18:37:09.685233', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.685233', '2017-12-21 18:37:09.685233', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.689848', '2017-12-21 18:37:09.689848', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.689848', '2017-12-21 18:37:09.689848', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.699322', '2017-12-21 18:37:09.699322', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.699322', '2017-12-21 18:37:09.699322', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.704425', '2017-12-21 18:37:09.704425', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.704425', '2017-12-21 18:37:09.704425', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.704425', '2017-12-21 18:37:09.704425', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.714393', '2017-12-21 18:37:09.714393', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.714393', '2017-12-21 18:37:09.714393', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.719956', '2017-12-21 18:37:09.719956', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.719956', '2017-12-21 18:37:09.719956', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.728066', '2017-12-21 18:37:09.728066', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.728066', '2017-12-21 18:37:09.728066', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.732129', '2017-12-21 18:37:09.732129', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.732129', '2017-12-21 18:37:09.732129', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.732129', '2017-12-21 18:37:09.732129', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.736251', '2017-12-21 18:37:09.736251', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.736251', '2017-12-21 18:37:09.736251', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.740660', '2017-12-21 18:37:09.740660', 980190962)[0m
+  [1m[36mFixture Insert (1.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.740660', '2017-12-21 18:37:09.740660', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.756909', '2017-12-21 18:37:09.756909', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.756909', '2017-12-21 18:37:09.756909', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.761317', '2017-12-21 18:37:09.761317', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.761317', '2017-12-21 18:37:09.761317', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.761317', '2017-12-21 18:37:09.761317', 926834398)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.765322', '2017-12-21 18:37:09.765322', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.765322', '2017-12-21 18:37:09.765322', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.769220', '2017-12-21 18:37:09.769220', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.769220', '2017-12-21 18:37:09.769220', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.870576', '2017-12-21 18:37:09.870576', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.870576', '2017-12-21 18:37:09.870576', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.874854', '2017-12-21 18:37:09.874854', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.874854', '2017-12-21 18:37:09.874854', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.874854', '2017-12-21 18:37:09.874854', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.880859', '2017-12-21 18:37:09.880859', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.880859', '2017-12-21 18:37:09.880859', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.885597', '2017-12-21 18:37:09.885597', 980190962)[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.885597', '2017-12-21 18:37:09.885597', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.900469', '2017-12-21 18:37:09.900469', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.900469', '2017-12-21 18:37:09.900469', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.907587', '2017-12-21 18:37:09.907587', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.907587', '2017-12-21 18:37:09.907587', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.907587', '2017-12-21 18:37:09.907587', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.912380', '2017-12-21 18:37:09.912380', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.912380', '2017-12-21 18:37:09.912380', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.916707', '2017-12-21 18:37:09.916707', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.916707', '2017-12-21 18:37:09.916707', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (1.0ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.928262', '2017-12-21 18:37:09.928262', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.928262', '2017-12-21 18:37:09.928262', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.938858', '2017-12-21 18:37:09.938858', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.938858', '2017-12-21 18:37:09.938858', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.938858', '2017-12-21 18:37:09.938858', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.943680', '2017-12-21 18:37:09.943680', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.943680', '2017-12-21 18:37:09.943680', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.948242', '2017-12-21 18:37:09.948242', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.948242', '2017-12-21 18:37:09.948242', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.958141', '2017-12-21 18:37:09.958141', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.958141', '2017-12-21 18:37:09.958141', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.6ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.964914', '2017-12-21 18:37:09.964914', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.964914', '2017-12-21 18:37:09.964914', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.964914', '2017-12-21 18:37:09.964914', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.972952', '2017-12-21 18:37:09.972952', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.972952', '2017-12-21 18:37:09.972952', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.978217', '2017-12-21 18:37:09.978217', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:09.978217', '2017-12-21 18:37:09.978217', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:09.986450', '2017-12-21 18:37:09.986450', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:09.986450', '2017-12-21 18:37:09.986450', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:09.990530', '2017-12-21 18:37:09.990530', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:09.990530', '2017-12-21 18:37:09.990530', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:09.990530', '2017-12-21 18:37:09.990530', 926834398)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:09.994496', '2017-12-21 18:37:09.994496', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:09.994496', '2017-12-21 18:37:09.994496', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.000580', '2017-12-21 18:37:10.000580', 980190962)[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.000580', '2017-12-21 18:37:10.000580', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.015517', '2017-12-21 18:37:10.015517', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.015517', '2017-12-21 18:37:10.015517', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.020735', '2017-12-21 18:37:10.020735', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.020735', '2017-12-21 18:37:10.020735', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.020735', '2017-12-21 18:37:10.020735', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.025630', '2017-12-21 18:37:10.025630', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.025630', '2017-12-21 18:37:10.025630', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.7ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.030225', '2017-12-21 18:37:10.030225', 980190962)[0m
+  [1m[36mFixture Insert (1.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.030225', '2017-12-21 18:37:10.030225', 298486374)[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.047945', '2017-12-21 18:37:10.047945', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.047945', '2017-12-21 18:37:10.047945', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.052428', '2017-12-21 18:37:10.052428', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.052428', '2017-12-21 18:37:10.052428', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.052428', '2017-12-21 18:37:10.052428', 926834398)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.056545', '2017-12-21 18:37:10.056545', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.056545', '2017-12-21 18:37:10.056545', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.060207', '2017-12-21 18:37:10.060207', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.060207', '2017-12-21 18:37:10.060207', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.074353', '2017-12-21 18:37:10.074353', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.074353', '2017-12-21 18:37:10.074353', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.081901', '2017-12-21 18:37:10.081901', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.081901', '2017-12-21 18:37:10.081901', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.081901', '2017-12-21 18:37:10.081901', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.087008', '2017-12-21 18:37:10.087008', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.087008', '2017-12-21 18:37:10.087008', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.091477', '2017-12-21 18:37:10.091477', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.091477', '2017-12-21 18:37:10.091477', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.100636', '2017-12-21 18:37:10.100636', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.100636', '2017-12-21 18:37:10.100636', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.117386', '2017-12-21 18:37:10.117386', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.117386', '2017-12-21 18:37:10.117386', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.117386', '2017-12-21 18:37:10.117386', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.122148', '2017-12-21 18:37:10.122148', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.122148', '2017-12-21 18:37:10.122148', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.126693', '2017-12-21 18:37:10.126693', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.126693', '2017-12-21 18:37:10.126693', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.136166', '2017-12-21 18:37:10.136166', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.136166', '2017-12-21 18:37:10.136166', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.145807', '2017-12-21 18:37:10.145807', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.145807', '2017-12-21 18:37:10.145807', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.145807', '2017-12-21 18:37:10.145807', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.152022', '2017-12-21 18:37:10.152022', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.152022', '2017-12-21 18:37:10.152022', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.156526', '2017-12-21 18:37:10.156526', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.156526', '2017-12-21 18:37:10.156526', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.165186', '2017-12-21 18:37:10.165186', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.165186', '2017-12-21 18:37:10.165186', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.169752', '2017-12-21 18:37:10.169752', 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.169752', '2017-12-21 18:37:10.169752', 298486374)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.169752', '2017-12-21 18:37:10.169752', 926834398)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.176660', '2017-12-21 18:37:10.176660', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.176660', '2017-12-21 18:37:10.176660', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.185706', '2017-12-21 18:37:10.185706', 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.185706', '2017-12-21 18:37:10.185706', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.194248', '2017-12-21 18:37:10.194248', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.194248', '2017-12-21 18:37:10.194248', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.199054', '2017-12-21 18:37:10.199054', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.199054', '2017-12-21 18:37:10.199054', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.199054', '2017-12-21 18:37:10.199054', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.204215', '2017-12-21 18:37:10.204215', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.204215', '2017-12-21 18:37:10.204215', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.210711', '2017-12-21 18:37:10.210711', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.210711', '2017-12-21 18:37:10.210711', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.225054', '2017-12-21 18:37:10.225054', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.225054', '2017-12-21 18:37:10.225054', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.230117', '2017-12-21 18:37:10.230117', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.230117', '2017-12-21 18:37:10.230117', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.230117', '2017-12-21 18:37:10.230117', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.235046', '2017-12-21 18:37:10.235046', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.235046', '2017-12-21 18:37:10.235046', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.239913', '2017-12-21 18:37:10.239913', 980190962)[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.239913', '2017-12-21 18:37:10.239913', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.256363', '2017-12-21 18:37:10.256363', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.256363', '2017-12-21 18:37:10.256363', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.261304', '2017-12-21 18:37:10.261304', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.261304', '2017-12-21 18:37:10.261304', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.261304', '2017-12-21 18:37:10.261304', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.266043', '2017-12-21 18:37:10.266043', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.266043', '2017-12-21 18:37:10.266043', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.270591', '2017-12-21 18:37:10.270591', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.270591', '2017-12-21 18:37:10.270591', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.285107', '2017-12-21 18:37:10.285107', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.285107', '2017-12-21 18:37:10.285107', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.290885', '2017-12-21 18:37:10.290885', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.290885', '2017-12-21 18:37:10.290885', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.290885', '2017-12-21 18:37:10.290885', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.295492', '2017-12-21 18:37:10.295492', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.295492', '2017-12-21 18:37:10.295492', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.300146', '2017-12-21 18:37:10.300146', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.300146', '2017-12-21 18:37:10.300146', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.6ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.310377', '2017-12-21 18:37:10.310377', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.310377', '2017-12-21 18:37:10.310377', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.320289', '2017-12-21 18:37:10.320289', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.320289', '2017-12-21 18:37:10.320289', 298486374)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.320289', '2017-12-21 18:37:10.320289', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.328118', '2017-12-21 18:37:10.328118', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.328118', '2017-12-21 18:37:10.328118', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.332592', '2017-12-21 18:37:10.332592', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.332592', '2017-12-21 18:37:10.332592', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.341875', '2017-12-21 18:37:10.341875', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.341875', '2017-12-21 18:37:10.341875', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.6ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.346871', '2017-12-21 18:37:10.346871', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.346871', '2017-12-21 18:37:10.346871', 298486374)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.346871', '2017-12-21 18:37:10.346871', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.356693', '2017-12-21 18:37:10.356693', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.356693', '2017-12-21 18:37:10.356693', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.362440', '2017-12-21 18:37:10.362440', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.362440', '2017-12-21 18:37:10.362440', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.371808', '2017-12-21 18:37:10.371808', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.371808', '2017-12-21 18:37:10.371808', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.376687', '2017-12-21 18:37:10.376687', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.376687', '2017-12-21 18:37:10.376687', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.376687', '2017-12-21 18:37:10.376687', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.381440', '2017-12-21 18:37:10.381440', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.381440', '2017-12-21 18:37:10.381440', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.390024', '2017-12-21 18:37:10.390024', 980190962)[0m
+  [1m[36mFixture Insert (0.9ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.390024', '2017-12-21 18:37:10.390024', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.403933', '2017-12-21 18:37:10.403933', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.403933', '2017-12-21 18:37:10.403933', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.408557', '2017-12-21 18:37:10.408557', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.408557', '2017-12-21 18:37:10.408557', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.408557', '2017-12-21 18:37:10.408557', 926834398)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.413175', '2017-12-21 18:37:10.413175', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.413175', '2017-12-21 18:37:10.413175', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.416818', '2017-12-21 18:37:10.416818', 980190962)[0m
+  [1m[36mFixture Insert (1.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.416818', '2017-12-21 18:37:10.416818', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.432106', '2017-12-21 18:37:10.432106', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.432106', '2017-12-21 18:37:10.432106', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.437116', '2017-12-21 18:37:10.437116', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.437116', '2017-12-21 18:37:10.437116', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.437116', '2017-12-21 18:37:10.437116', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.441810', '2017-12-21 18:37:10.441810', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.441810', '2017-12-21 18:37:10.441810', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.446101', '2017-12-21 18:37:10.446101', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.446101', '2017-12-21 18:37:10.446101', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:37:10.456897', '2017-12-21 18:37:10.456897', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:37:10.456897', '2017-12-21 18:37:10.456897', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:37:10.465005', '2017-12-21 18:37:10.465005', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:37:10.465005', '2017-12-21 18:37:10.465005', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:37:10.465005', '2017-12-21 18:37:10.465005', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:37:10.470802', '2017-12-21 18:37:10.470802', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:37:10.470802', '2017-12-21 18:37:10.470802', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.475463', '2017-12-21 18:37:10.475463', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:37:10.475463', '2017-12-21 18:37:10.475463', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (1.4ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:46:27.383945', '2017-12-21 18:46:27.383945', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (1.1ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:46:27.383945', '2017-12-21 18:46:27.383945', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:46:27.399916', '2017-12-21 18:46:27.399916', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:46:27.399916', '2017-12-21 18:46:27.399916', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:46:27.399916', '2017-12-21 18:46:27.399916', 926834398)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:46:27.408230', '2017-12-21 18:46:27.408230', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:46:27.408230', '2017-12-21 18:46:27.408230', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.416731', '2017-12-21 18:46:27.416731', 980190962)[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.416731', '2017-12-21 18:46:27.416731', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:46:27.431539', '2017-12-21 18:46:27.431539', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:46:27.431539', '2017-12-21 18:46:27.431539', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:46:27.436949', '2017-12-21 18:46:27.436949', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:46:27.436949', '2017-12-21 18:46:27.436949', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:46:27.436949', '2017-12-21 18:46:27.436949', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:46:27.445769', '2017-12-21 18:46:27.445769', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:46:27.445769', '2017-12-21 18:46:27.445769', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.5ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.451381', '2017-12-21 18:46:27.451381', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.451381', '2017-12-21 18:46:27.451381', 298486374)[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.9ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:46:27.464112', '2017-12-21 18:46:27.464112', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:46:27.464112', '2017-12-21 18:46:27.464112', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:46:27.470757', '2017-12-21 18:46:27.470757', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:46:27.470757', '2017-12-21 18:46:27.470757', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:46:27.470757', '2017-12-21 18:46:27.470757', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:46:27.475355', '2017-12-21 18:46:27.475355', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:46:27.475355', '2017-12-21 18:46:27.475355', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.479791', '2017-12-21 18:46:27.479791', 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.479791', '2017-12-21 18:46:27.479791', 298486374)[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:46:27.491831', '2017-12-21 18:46:27.491831', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:46:27.491831', '2017-12-21 18:46:27.491831', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.1ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:46:27.500210', '2017-12-21 18:46:27.500210', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:46:27.500210', '2017-12-21 18:46:27.500210', 298486374)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:46:27.500210', '2017-12-21 18:46:27.500210', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:46:27.504033', '2017-12-21 18:46:27.504033', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:46:27.504033', '2017-12-21 18:46:27.504033', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.508057', '2017-12-21 18:46:27.508057', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.508057', '2017-12-21 18:46:27.508057', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:46:27.516934', '2017-12-21 18:46:27.516934', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:46:27.516934', '2017-12-21 18:46:27.516934', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:46:27.520819', '2017-12-21 18:46:27.520819', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:46:27.520819', '2017-12-21 18:46:27.520819', 298486374)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:46:27.520819', '2017-12-21 18:46:27.520819', 926834398)[0m
+  [1m[36mFixture Delete (0.5ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:46:27.529244', '2017-12-21 18:46:27.529244', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:46:27.529244', '2017-12-21 18:46:27.529244', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.537335', '2017-12-21 18:46:27.537335', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.537335', '2017-12-21 18:46:27.537335', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:46:27.547267', '2017-12-21 18:46:27.547267', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:46:27.547267', '2017-12-21 18:46:27.547267', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:46:27.552341', '2017-12-21 18:46:27.552341', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:46:27.552341', '2017-12-21 18:46:27.552341', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:46:27.552341', '2017-12-21 18:46:27.552341', 926834398)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (1.0ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:46:27.557760', '2017-12-21 18:46:27.557760', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.8ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:46:27.557760', '2017-12-21 18:46:27.557760', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.569474', '2017-12-21 18:46:27.569474', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.569474', '2017-12-21 18:46:27.569474', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "results" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "exams" DISABLE TRIGGER ALL;ALTER TABLE "courses" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "students"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('Brost', 'Pedro', '98765432', '98765/4', 'example@example.com', '2017-12-21 18:46:27.579590', '2017-12-21 18:46:27.579590', 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "students" ("surname", "name", "dni", "number", "email", "created_at", "updated_at", "id", "course_id") VALUES ('borrelli', 'franco', '12345678', '12345/6', 'example@example.com', '2017-12-21 18:46:27.579590', '2017-12-21 18:46:27.579590', 298486374, 980190962)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2017, 'Curso 1', '2017-12-21 18:46:27.584664', '2017-12-21 18:46:27.584664', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2018, 'Curso 2', '2017-12-21 18:46:27.584664', '2017-12-21 18:46:27.584664', 298486374)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "courses" ("year", "title", "created_at", "updated_at", "id") VALUES (2019, 'Curso 3', '2017-12-21 18:46:27.584664', '2017-12-21 18:46:27.584664', 926834398)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "results"[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (4, '2017-12-21 18:46:27.589245', '2017-12-21 18:46:27.589245', 980190962, 980190962, 980190962)[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "results" ("mark", "created_at", "updated_at", "id", "exam_id", "student_id") VALUES (6, '2017-12-21 18:46:27.589245', '2017-12-21 18:46:27.589245', 298486374, 980190962, 113629430)[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.599116', '2017-12-21 18:46:27.599116', 980190962)[0m
+  [1m[36mFixture Insert (0.6ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at", "id") VALUES ('2017-12-21 18:46:27.599116', '2017-12-21 18:46:27.599116', 298486374)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
