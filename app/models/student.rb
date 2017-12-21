@@ -1,12 +1,10 @@
 class Student < ApplicationRecord
   belongs_to :course
   has_many :results
-  has_many :students, through: :results
+  has_many :exams, through: :results
 
-  dni_regex = /\d{5,8}/
   number_regex = /\A[1-9]\d{0,6}.[\/][1-9]\d{0,2}\z/
 
-  dni_message = 'El dni no es valido.'
   number_message = 'El legajo ingresado no es valido.'
   email_message = 'El email ingresado no es valido.'
 
@@ -14,8 +12,7 @@ class Student < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }
 
-  validates :dni, presence: true, length: { maximum: 255 },
-                  format: { with: dni_regex, message: dni_message }
+  validates :dni, presence: true, length: { minimum: 5, maximum: 8 }
 
   validates :number, presence: true, length: { maximum: 255 },
                      format: { with: number_regex, message: number_message }
@@ -33,7 +30,7 @@ class Student < ApplicationRecord
   end
 
   def mark_for(exam)
-    (Result.for self, exam).first.mark
+    exam.mark_for(self)
   end
 
   def full_name
