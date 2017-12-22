@@ -1,5 +1,5 @@
 User.create!([
-  {email: "admin@ttps.com.ar", encrypted_password: "$2a$11$EGSUrO0LiYvlrw4wBt.Yt.17GZtCXjEQ0Zc7j.3UhdCQxe9IwdzVG", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-12-21 20:59:44", sign_in_count: 4, current_sign_in_at: "2017-12-21 21:52:38", last_sign_in_at: "2017-12-21 20:59:44", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "186.137.50.237"}
+  {email: "admin@ttps.com.ar", encrypted_password: "$2a$11$EGSUrO0LiYvlrw4wBt.Yt.17GZtCXjEQ0Zc7j.3UhdCQxe9IwdzVG", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 6, current_sign_in_at: "2017-12-22 01:38:47", last_sign_in_at: "2017-12-22 01:34:43", current_sign_in_ip: "186.137.50.237", last_sign_in_ip: "186.137.50.237"}
 ])
 Course.create!([
   {year: 2016, title: "Turno Tarde"},
@@ -49,11 +49,11 @@ Student.create!([
   {course_id: 2, surname: "Belenda", name: "Lucas", dni: "87654321", number: "65432/1", email: "estoes@un.email"},
   {course_id: 2, surname: "Borrelli", name: "Franco", dni: "12345678", number: "12345/6", email: "notengo@imaginacion.com"},
   {course_id: 1, surname: "Brost", name: "Pedro", dni: "12345678", number: "12345/6", email: "email3@email.com"},
-  {course_id: 2, surname: "Liptak", name: "Franco", dni: "12345678", number: "12345/6", email: "email2@email.com"},
-  {course_id: 1, surname: "Obama", name: "Barack", dni: "12345678", number: "12345/6", email: "obama@whitehouse.gov"},
-  {course_id: 2, surname: "Onofri", name: "Camila", dni: "12345678", number: "12345/6", email: "email@email.com"},
-  {course_id: 1, surname: "Pierobon", name: "Matias Marcos", dni: "12345678", number: "12345/6", email: "email4@email.com"},
+  {course_id: 2, surname: "Liptak", name: "Franco", dni: "22345678", number: "22345/6", email: "email2@email.com"},
+  {course_id: 1, surname: "Obama", name: "Barack", dni: "22345678", number: "22345/6", email: "obama@whitehouse.gov"},
+  {course_id: 2, surname: "Onofri", name: "Camila", dni: "32345678", number: "32345/6", email: "email@email.com"},
+  {course_id: 1, surname: "Pierobon", name: "Matias Marcos", dni: "32345678", number: "32345/6", email: "email4@email.com"},
   {course_id: 1, surname: "Raimondi", name: "Sebastian", dni: "40345182", number: "21755/8", email: "sebastianraimondi@gmail.com"},
-  {course_id: 2, surname: "Rios", name: "Gaston", dni: "12345678", number: "12345/6", email: "email1@email.com"},
-  {course_id: 1, surname: "Riquelme", name: "Juan Román", dni: "12345678", number: "12345/6", email: "riquelme@estafeliz.com"}
+  {course_id: 2, surname: "Rios", name: "Gaston", dni: "42345678", number: "42345/6", email: "email1@email.com"},
+  {course_id: 1, surname: "Riquelme", name: "Juan Román", dni: "42345678", number: "42345/6", email: "riquelme@estafeliz.com"}
 ])
