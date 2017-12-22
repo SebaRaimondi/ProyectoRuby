@@ -49,6 +49,13 @@ class StudentTest < ActiveSupport::TestCase
     assert_not st.save
   end
 
+  test 'should not save if dni already registered in course' do
+    st = students(:one)
+    st2 = students(:two)
+    st.dni = st2.dni
+    assert_not st.save
+  end
+
   # number
   test 'should not save if number is not present' do
     st = students(:one)
@@ -66,6 +73,13 @@ class StudentTest < ActiveSupport::TestCase
     assert st.save
   end
 
+  test 'should not save if number already registered in course' do
+    st = students(:one)
+    st2 = students(:two)
+    st.number = st2.number
+    assert_not st.save
+  end
+
   # email
   test 'should not save if email is not present' do
     st = students(:one)
@@ -81,6 +95,13 @@ class StudentTest < ActiveSupport::TestCase
 
     st.email = 'mailejemplo@mail.com'
     assert st.save
+  end
+
+  test 'should not save if email already registered in course' do
+    st = students(:one)
+    st2 = students(:two)
+    st.email = st2.email
+    assert_not st.save
   end
 
   # Associations

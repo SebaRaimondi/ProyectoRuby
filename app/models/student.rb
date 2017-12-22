@@ -12,13 +12,16 @@ class Student < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }
 
-  validates :dni, presence: true, length: { minimum: 5, maximum: 8 }
+  validates :dni, presence: true, length: { minimum: 5, maximum: 8 },
+                  uniqueness: { scope: :course_id }
 
   validates :number, presence: true, length: { maximum: 255 },
-                     format: { with: number_regex, message: number_message }
+                     format: { with: number_regex, message: number_message },
+                     uniqueness: { scope: :course_id }
 
   validates :email, presence: true, length: { maximum: 255 },
-                    email_format: { message: email_message }
+                    email_format: { message: email_message },
+                    uniqueness: { scope: :course_id }
 
   default_scope { order(surname: :asc, name: :asc) }
 
