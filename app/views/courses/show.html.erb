@@ -69,7 +69,9 @@
     <div class="row" style="text-align: center">
         <div class="center-helper container">
             <%= link_to "Volver a Cursadas", courses_path, class: "button btn-red" %>
-            <button type="button" class="button" data-toggle="modal" data-target="#resultsModal">Modificar Notas</button>
+            <% if !@course.exams.empty? && !@course.students.empty? %>
+                <button type="button" class="button" data-toggle="modal" data-target="#resultsModal">Modificar Notas</button>
+            <% end %>
             <%= link_to "Administrar Examenes", course_exams_path(@course), class: "button" %>
             <%= link_to "Administrar Alumnos", course_students_path(@course), class: "button" %>
         </div>
